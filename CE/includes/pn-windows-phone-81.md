@@ -1,0 +1,1 @@
+<span data-ttu-id="e4202-101">Windows Phone 8.1</span><span class="sxs-lookup"><span data-stu-id="e4202-101">Windows Phone 8.1</span></span>

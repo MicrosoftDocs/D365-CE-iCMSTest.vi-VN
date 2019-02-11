@@ -1,0 +1,1 @@
+<span data-ttu-id="d44f6-101">Bạn cần phải là một quản trị viên Social Engagement để thực hiện nhiệm vụ này.</span><span class="sxs-lookup"><span data-stu-id="d44f6-101">You need to be a Social Engagement Administrator to perform this task.</span></span>

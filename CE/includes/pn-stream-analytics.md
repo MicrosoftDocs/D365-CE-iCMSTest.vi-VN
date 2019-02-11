@@ -1,0 +1,1 @@
+<span data-ttu-id="9d333-101">Phân tích Luồng</span><span class="sxs-lookup"><span data-stu-id="9d333-101">Stream Analytics</span></span>

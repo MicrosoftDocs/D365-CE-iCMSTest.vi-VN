@@ -1,0 +1,1 @@
+<span data-ttu-id="3812d-101">Bạn cần phải là một quản trị viên Social Engagement hoặc Phân tích viên Năng lực để thực hiện nhiệm vụ này.</span><span class="sxs-lookup"><span data-stu-id="3812d-101">You need to be a Social Engagement Administrator or Power Analyst to perform this task.</span></span>

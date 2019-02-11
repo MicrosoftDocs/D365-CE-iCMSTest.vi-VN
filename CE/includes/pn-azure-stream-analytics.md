@@ -1,0 +1,1 @@
+<span data-ttu-id="89f6c-101">Phân tích Luồng Azure</span><span class="sxs-lookup"><span data-stu-id="89f6c-101">Azure Stream Analytics</span></span>
