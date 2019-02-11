@@ -1,0 +1,1 @@
+Để bật kịch bản Gắn kết và Phân tích, trong một số trường hợp, Microsoft Social Engagement kết nối với các dịch vụ bên thứ ba Twitter và Facebook để truy xuất Nội dung Mạng xã hội. Khi thiết lập những kết nối này, một số dữ liệu như địa chỉ IP của bạn có thể được chia sẻ với các dịch vụ đó.

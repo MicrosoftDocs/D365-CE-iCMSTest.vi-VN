@@ -1,0 +1,2 @@
+Microsoft Social Engagement sử dụng cookie phiên để cho phép người dùng chuyển từ trang này sang trang khác mà không phải đăng nhập lại trên mỗi trang. Theo quyết định của người dùng, chúng tôi có thể sử dụng cookie để lưu thông tin đăng nhập để tạo điều kiện xác thực cho các phiên trong tương lai.   
+ Cần có cookie phiên để vận hành Microsoft Social Engagement; không có tùy chọn không sử dụng các cookie này. Tuy nhiên, cookie đăng nhập chỉ được lưu theo yêu cầu của người dùng.

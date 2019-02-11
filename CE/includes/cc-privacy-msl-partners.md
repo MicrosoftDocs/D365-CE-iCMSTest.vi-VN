@@ -1,0 +1,1 @@
+Nếu bạn chỉ định đối tác của Microsoft (ví dụ: bằng cách dùng thử hoặc mua Microsoft Social Engagement theo báo giá hoặc yêu cầu của đối tác hoặc bằng cách chỉ định một đối tác để hỗ trợ trong việc sử dụng hay quản lý Social Engagement), Microsoft sẽ cung cấp thông tin của bạn cho đối tác mà bạn chỉ định.
