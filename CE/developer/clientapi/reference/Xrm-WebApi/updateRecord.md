@@ -1,0 +1,178 @@
+---
+title: updateRecord (Client API reference) in Dynamics 365 for Customer Engagement| MicrosoftDocs
+description: ''
+keywords: ''
+ms.date: 12/18/2017
+ms.service:
+- crm-online
+ms.topic: reference
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+ms.assetid: f5d4c8a9-4188-472a-83bf-b986dd135754
+author: KumarVivek
+ms.author: kvivek
+manager: amyla
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: fe9232eda362fffdd53c44eca008fee589bfdbaf
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "388778"
+---
+# <a name="updaterecord-client-api-reference"></a>updateRecord (Client API reference)
+
+[!INCLUDE[](../../../../includes/cc_applies_to_update_9_0_0.md)]
+
+[!INCLUDE[./includes/updateRecord-description.md](./includes/updateRecord-description.md)] 
+
+## <a name="syntax"></a>Cú pháp
+
+`Xrm.WebApi.updateRecord(entityLogicalName, id, data).then(successCallback, errorCallback);`
+
+## <a name="parameters"></a>Tham số
+
+<table style="width:100%">
+<tr>
+<th>Tên</th>
+<th>Loại</th>
+<th>Bắt buộc</th>
+<th>Mô tả</th>
+</tr>
+<tr>
+<td>entityLogicalName</td>
+<td>Chuỗi</td>
+<td>Có</td>
+<td>The entity logical name of the record you want to update. For example: &quot;account&quot;.</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>Chuỗi</td>
+<td>Có</td>
+<td>GUID of the entity record you want to update.</td>
+</tr>
+<tr>
+<td>dữ liệu</td>
+<td>Đối tượng</td>
+<td>Có</td>
+<td><p>A JSON object containing <code>key: value</code> pairs, where <code>key</code> is the property of the entity and <code>value</code> is the value of the property you want to update.</p>
+<p>See examples later in this topic to see how you can define the <code>data</code> object for various update scenarios.</td>
+</tr>
+<tr>
+<td>successCallback</td>
+<td>Hàm</td>
+<td>Không</td>
+<td><p>A function to call when a record is updated. An object with the following properties will be passed to identify the updated record:</p>
+<ul>
+<li><b>entityType</b>: String. The entity type of the updated record.</li>
+<li><b>id</b>: String. GUID of the updated record.</li>
+</ul></td>
+</tr>
+<tr>
+<td>errorCallback</td>
+<td>Hàm</td>
+<td>Không</td>
+<td>A function to call when the operation fails. An object with the following properties will be passed:
+<ul>
+<li><b>errorCode</b>: Number. The error code.</li>
+<li><b>message</b>: String. An error message describing the issue.</li>
+</ul></td>
+</tr>
+</table>
+
+## <a name="return-value"></a>Giá trị trả lại
+
+On success, returns a promise object containing the attributes specified earlier in the description of the **successCallback** parameter.
+
+## <a name="examples"></a>Ví dụ
+
+These examples use some of the same request objects as demonstrated in [Update and delete entities using the Web API](../../../webapi/update-delete-entities-using-web-api.md) to define the data object for updating an entity record.
+
+### <a name="basic-update"></a>Basic update 
+
+Updates an existing account record with record ID = 5531d753-95af-e711-a94e-000d3a11e605.
+
+```JavaScript
+// define the data to update a record
+var data =
+    {
+        "name": "Updated Sample Account ",
+        "creditonhold": true,
+        "address1_latitude": 47.639583,
+        "description": "This is the updated description of the sample account",
+        "revenue": 6000000,
+        "accountcategorycode": 2
+    }
+// update the record
+Xrm.WebApi.updateRecord("account", "5531d753-95af-e711-a94e-000d3a11e605", data).then(
+    function success(result) {
+        console.log("Account updated");
+        // perform operations on record update
+    },
+    function (error) {
+        console.log(error.message);
+        // handle error conditions
+    }
+);
+```
+
+### <a name="update-associations-to-the-related-entities"></a>Update associations to the related entities
+
+To update association to the related entity records (lookups), set the value of single-valued navigation properties using the `@odata.bind` annotation to another record. However, for mobile clients in the offline mode, you cannot use the `@odata.bind` annotation, and instead have to pass a **lookup** object (**logicalname** and **id**) pointing to the target record. Here are code examples for both the scenarios:
+
+**For online scenario (connected to server)**
+
+The following example updates an account record to associate another contact record as the primary contact for the account:
+
+```JavaScript
+// define the data to update a record
+var data =
+    {
+        "primarycontactid@odata.bind": "/contacts(61a0e5b9-88df-e311-b8e5-6c3be5a8b200)"
+    }
+// update the record
+Xrm.WebApi.updateRecord("account", "5531d753-95af-e711-a94e-000d3a11e605", data).then(
+    function success(result) {
+        console.log("Account updated");
+        // perform operations on record update
+    },
+    function (error) {
+        console.log(error.message);
+        // handle error conditions
+    }
+);
+```
+
+**For mobile offline scenario**
+
+Here is the updated sample code to update an account record to associate another contact record as the primary contact for the account from mobile clients when working in the offline mode:
+
+```JavaScript
+// define the data to update a record
+var data =
+    {
+        "primarycontactid":
+        {
+            "logicalname": "contact",
+            "id": "61a0e5b9-88df-e311-b8e5-6c3be5a8b200"
+        }
+    }
+// update the record
+Xrm.WebApi.offline.updateRecord("account", "5531d753-95af-e711-a94e-000d3a11e605", data).then(
+    function success(result) {
+        console.log("Account updated");
+        // perform operations on record update
+    },
+    function (error) {
+        console.log(error.message);
+        // handle error conditions
+    }
+);
+```
+ 
+### <a name="related-topics"></a>Chủ đề liên quan
+
+[Xrm.WebApi](../xrm-webapi.md)
