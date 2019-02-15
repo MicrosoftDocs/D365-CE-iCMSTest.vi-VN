@@ -1,0 +1,44 @@
+---
+title: Online Management API for Dynamics 365 for Customer Engagement apps| MicrosoftDocs
+ms.date: 10/31/2017
+ms.service: crm-online
+ms.topic: conceptual
+applies_to: Dynamics 365 for Customer Engagement (online)
+ms.assetid: b9ee3048-7065-48e6-87fc-7728c51bdd4e
+author: KumarVivek
+ms.author: kvivek
+manager: amyla
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: 47f3f458f56d0331b8e1ca8112afd6f33208cf60
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "386427"
+---
+# <a name="online-management-api-for-dynamics-365-for-customer-engagement-apps"></a><span data-ttu-id="a66a6-102">Online Management API for Dynamics 365 for Customer Engagement apps</span><span class="sxs-lookup"><span data-stu-id="a66a6-102">Online Management API for Dynamics 365 for Customer Engagement apps</span></span>
+
+[!INCLUDE[](../includes/cc_applies_to_update_9_0_0.md)]
+
+<span data-ttu-id="a66a6-103">Online Management API is a REST API that lets you create and manage Customer Engagement instances in your Office 365 tenant.</span><span class="sxs-lookup"><span data-stu-id="a66a6-103">Online Management API is a REST API that lets you create and manage Customer Engagement instances in your Office 365 tenant.</span></span> 
+
+[!INCLUDE[cc-custeng-definition](../includes/cc-custeng-definition.md)]
+
+<span data-ttu-id="a66a6-104">Application publishers and ISVs can use the Online Management API to:</span><span class="sxs-lookup"><span data-stu-id="a66a6-104">Application publishers and ISVs can use the Online Management API to:</span></span>
+-  <span data-ttu-id="a66a6-105">Automate creation of custom demo Customer Engagement instances</span><span class="sxs-lookup"><span data-stu-id="a66a6-105">Automate creation of custom demo Customer Engagement instances</span></span>
+-  <span data-ttu-id="a66a6-106">Manage multiple Customer Engagement instances in case of multi-org setup in their enterprise</span><span class="sxs-lookup"><span data-stu-id="a66a6-106">Manage multiple Customer Engagement instances in case of multi-org setup in their enterprise</span></span> 
+
+<span data-ttu-id="a66a6-107">Using the Online Management API, you can perform various tasks on your online instance such as create, retrieve, delete, backup and restore instances, and other instance-related tasks.</span><span class="sxs-lookup"><span data-stu-id="a66a6-107">Using the Online Management API, you can perform various tasks on your online instance such as create, retrieve, delete, backup and restore instances, and other instance-related tasks.</span></span> 
+
+>[!NOTE]
+><span data-ttu-id="a66a6-108">Administrators can manage Customer Engagement online instances using either of the following:</span><span class="sxs-lookup"><span data-stu-id="a66a6-108">Administrators can manage Customer Engagement online instances using either of the following:</span></span>
+>- [<span data-ttu-id="a66a6-109">Dynamics 365 for Customer Engagement Admin Center</span><span class="sxs-lookup"><span data-stu-id="a66a6-109">Dynamics 365 for Customer Engagement Admin Center</span></span>](../admin/manage-online-instances.md)
+>- [<span data-ttu-id="a66a6-110">PowerShell cmdlets</span><span class="sxs-lookup"><span data-stu-id="a66a6-110">PowerShell cmdlets</span></span>](/powershell/dynamics365/customer-engagement/overview#get-started-using-the-microsoftxrmonlinemanagementapi-module) 
+  
+### <a name="related-sections"></a><span data-ttu-id="a66a6-111">Các phần liên quan</span><span class="sxs-lookup"><span data-stu-id="a66a6-111">Related Sections</span></span>  
+[<span data-ttu-id="a66a6-112">Online Management REST API Reference</span><span class="sxs-lookup"><span data-stu-id="a66a6-112">Online Management REST API Reference</span></span>](/rest/api/admin.services.crm.dynamics.com)
+
+[<span data-ttu-id="a66a6-113">Customer Engagement Developer Guide</span><span class="sxs-lookup"><span data-stu-id="a66a6-113">Customer Engagement Developer Guide</span></span>](developer-guide.md)

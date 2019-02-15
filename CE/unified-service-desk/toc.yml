@@ -1,0 +1,536 @@
+items:
+- name: Unified Service Desk Guide
+  href: unified-service-desk.md
+  items:
+  - name: Lịch sử phát hành
+    href: release-history.md
+  - name: What's new for Administrators
+    href: admin/whats-new-unified-service-desk-administrators.md
+  - name: What's new for Developers
+    href: what-s-new-in-unified-service-desk.md
+  - name: Download Unified Service Desk
+    href: download-unified-service-desk.md
+- name: Tổng quan về Unified Service Desk
+  href: admin/overview-unified-service-desk.md
+  items:
+  - name: Call center challenges and how Unified Service Desk can help
+    href: admin/call-center-challenges-how-unified-service-desk-can-help.md
+  - name: Sample Unified Service desk applications
+    href: admin/sample-unified-service-desk-applications.md
+    items:
+    - name: Unified Service Desk New Environment sample package
+      href: admin/unified-service-desk-new-environment-package.md
+    - name: Unified Service Desk Interactive Service Hub sample package
+      href: admin/unified-service-desk-interactive-service-hub-package.md
+    - name: Unified Service Desk Web Client sample package
+      href: admin/unified-service-desk-dynamics-365-web-client-package.md
+    - name: Unified Service Desk Unified Interface sample package
+      href: admin/unified-service-desk-dynamics-365-unified-interface-package.md
+    - name: Unified Service Desk Upgrade sample package
+      href: admin/unified-service-desk-upgrade-package.md
+- name: Install, deploy, and upgrade Unified Service Desk
+  href: admin/install-upgrade-deploy-unified-service-desk.md
+  items:
+  - name: Yêu cầu hệ thống Unified Service Desk
+    href: admin/unified-service-desk-system-requirements.md
+  - name: Install the Unified Service Desk client
+    href: admin/install-upgrade-unified-service-desk-client.md
+  - name: Deploy sample Unified Service Desk applications using Package Deployer
+    href: admin/deploy-sample-unified-service-desk-applications-using-package-deployer.md
+  - name: Upgrade Unified Service Desk
+    href: admin/upgrade-unified-service-desk-solution.md
+- name: Connect to a Dynamics 365 instance using the Unified Service Desk client
+  href: admin/connect-dynamics-365-instance-using-unified-service-desk-client.md
+- name: Update Unified Service Desk solution
+  href: admin/update-unified-service-desk-solution.md
+- name: Understand Unified Service Desk Concepts
+  href: understand-unified-service-desk-concepts.md
+  items:
+  - name: Core concepts for configuring Unified Service Desk
+    href: core-concepts-for-configuring-unified-service-desk.md
+    items:
+    - name: Unified Service Desk hosted controls
+      href: unified-service-desk-hosted-controls.md
+    - name: Sự kiện
+      href: events.md
+    - name: Hành động UII
+      href: uii-actions.md
+    - name: Cuộc gọi hành động
+      href: action-calls.md
+    - name: Thông số thay thế
+      href: replacement-parameters.md
+  - name: Unified Service Desk and the UII framework
+    href: unified-service-desk-uii-framework.md
+    items:
+    - name: Nền tảng Tích hợp Ứng dụng UII
+      href: uii-application-integration-framework.md
+    - name: UII hosted applications
+      href: uii-hosted-applications.md
+    - name: UII adapters
+      href: uii-adapters.md
+    - name: UII data driven adapters
+      href: uii-data-driven-adapters.md
+    - name: UII Hosted Application Toolkit (HAT)
+      href: uii-hosted-application-toolkit-hat.md
+    - name: UI Shell Framework
+      href: ui-shell-framework.md
+    - name: UII computer telephony integration (CTI) framework
+      href: uii-computer-telephony-integration-cti-framework.md
+- name: Quản trị và quản lý Unified Service Desk
+  href: admin/administer-manage-unified-service-desk.md
+  items:
+  - name: Preview feature - Support for Unified Interface Apps
+    href: admin/Support-unified-interfaces-apps-usd.md
+  - name: Preview feature - Unified Service Desk Administrator app
+    href: admin/unified-service-desk-administrator-app.md
+  - name: Unified Interface Settings
+    href: admin/unified-interface-settings.md
+  - name: Quản lý tùy chọn cho Unified Service Desk
+    href: admin/manage-options-unified-service-desk.md
+    items:
+    - name: Cấu hình bộ nhớ đệm ứng dụng trong Unified Service Desk
+      href: admin/configure-client-caching-unified-service-desk.md
+    - name: Help improve Unified Service Desk
+      href: admin/help-improve-unified-service-desk.md
+      items:
+      - name: Provide feedback about Unified Service Desk
+        href: admin/provide-feedback.md
+    - name: Comply with General Data Protection Regulation (GDPR)
+      href: admin/comply-gdpr.md
+      items:
+      - name: Comply Unified Service Desk data
+        href: admin/comply-unified-service-desk-data-gdpr.md
+  - name: Configure auditing and diagnostics in Unified Service Desk
+    href: admin/configure-auditing-diagnostics-unified-service-desk.md
+  - name: Distribute custom hosted controls using Customization Files
+    href: admin/distribute-custom-hosted-controls-using-customization-files.md
+  - name: Access management in Unified Service Desk
+    href: admin/security-unified-service-desk.md
+    items:
+    - name: Quản lý quyền truy cập bằng cách sử dụng vai trò bảo mật của Unified Service Desk
+      href: admin/manage-access-using-unified-service-desk-security-roles.md
+    - name: Quản lý quyền truy cập bằng cách sử dụng cấu hình của Unified Service Desk
+      href: admin/manage-access-using-unified-service-desk-configuration.md
+  - name: Web Client - Unified Interface Migration Assistant
+    items:
+    - name: Tổng quan
+      href: admin/overview-migration-assistant.md
+    - name: Download the migration assistant
+      href: admin/download-migration-assistant.md
+    - name: Migration steps
+      href: admin/migration-steps-web-client-unified-interface-configuration.md
+  - name: Migrate your Unified Service Desk configuration to another Customer Engagement instance
+    href: admin/migrate-unified-service-desk-configuration-dynamics-365-server.md
+    items:
+    - name: Nhập dữ liệu cấu hình Unified Service Desk
+      href: admin/import-unified-service-desk-configuration-data.md
+    - name: Export Unified Service Desk configuration data
+      href: admin/export-unified-service-desk-configuration-data.md
+  - name: Performance enhancement for CRM entity page loads
+    href: admin/performance-enhancement-CRM-entity-page-loads.md
+  - name: Recover Internet Explorer process instance
+    href: admin/recover-internet-explorer-process-instance.md
+  - name: Configure close confirmation window
+    href: admin/configure-close-confirmation-window.md
+- name: Public Preview - Analyze performance of Unified Service Desk
+  items:
+  - name: Overview of Unified Service Desk Performance Analyzer
+    href: admin/overview-performance-analyzer.md
+  - name: Download Unified Service Desk Performance Analyzer
+    href: admin/download-performance-analyzer.md
+  - name: Generate (collect) performance data log
+    href: admin/performance-data-collection-using-keyboard-shortcut.md
+  - name: Generate performance report
+    href: admin/generate-performance-report.md
+  - name: Overview of performance report user interface
+    href: admin/overview-performance-report-user-interface.md
+    items:
+    - name: Terminologies in the performance report
+      href: admin/terminologies-performance-report.md
+    - name: View, read, and compare performance report
+      href: admin/view-read-compare-performance-report.md
+    - name: Categories and operations
+      href: admin/operations-categories.md
+- name: Analyze best practices in Unified Service Desk
+  href: admin/analyze-best-practices-unified-service-desk.md
+  items:
+  - name: Download and install Best Practices Analyzer
+    href: admin/download-install-best-practices-analyzer.md
+  - name: 'Walkthrough: Configure Best Practices Analyzer'
+    href: admin/walkthrough-configure-best-practices-analyzer.md
+  - name: Read Best Practices Analyzer report
+    href: admin/read-best-practices-analyzer-report.md
+  - name: Best practice rule categories and parameters
+    href: admin/compliance-categories-parameters-bpa.md
+    items:
+    - name: System configurations
+      href: admin/system-configurations-bpa.md
+    - name: Internet Explorer settings
+      href: admin/internet-explorer-settings-bpa.md
+    - name: Unified Service Desk configurations
+      href: admin/unified-service-desk-configurations-bpa.md
+- name: Cấu hình ứng dụng tổng đài viên của bạn bằng cách sử dụng Unified Service Desk
+  href: configure-agent-application-unified-service-desk.md
+  items:
+  - name: Học cách sử dụng Unified Service Desk
+    href: learn-to-use-unified-service-desk.md
+    items:
+    - name: Loại kiểm soát tổ chức, hành động và sự kiện
+      href: hosted-control-types-actions-events.md
+    - name: Xem sự kiện và hành động xác định trước cho kiểm soát tổ chức
+      href: view-predefined-actions-events-hosted-control.md
+    - name: Xem trợ giúp được nhúng cho hành động và sự kiện
+      href: view-embedded-help-for-actions-and-events.md
+    - name: Sử dụng tham số thay thế để định cấu hình Unified Service Desk
+      href: use-replacement-parameters-configure-unified-service-desk.md
+    - name: Bảng điều khiển, loại bảng điều khiển và bố cục bảng điều khiển trong Unified Service Desk
+      href: panels-panel-types-panel-layouts.md
+    - name: Thanh công cụ trong Unified Service Desk
+      href: toolbars-unified-service-desk.md
+    - name: Sử dụng quy tắc điều hướng cửa sổ trong Unified Service Desk
+      href: use-window-navigation-rules-unified-service-desk.md
+    - name: Quản lý phiên trong Unified Service Desk
+      href: session-management-unified-service-desk.md
+    - name: Hướng dẫn tương tác với khách hàng bằng mã lệnh tổng đài viên
+      href: guide-customer-interactions-agent-scripts.md
+    - name: Thực hiện mã lệnh sử dụng Scriptlet trong Unified Service Desk
+      href: execute-scripts-using-scriptlets-unified-service-desk.md
+    - name: Tìm kiếm dữ liệu bằng cách sử dụng tìm kiếm thực thể trong Unified Service Desk
+      href: search-data-entity-searches.md
+    - name: Use Dynamics 365 knowledge for effective customer engagement
+      href: use-dynamics-365-knowledge-effective-customer-engagement.md
+  - name: Bắt đầu với cấu hình ứng dụng tổng đài viên của bạn
+    href: get-started-configuring-agent-application.md
+    items:
+    - name: Quản lý kiểm soát tổ chức, hành động và sự kiện
+      href: manage-hosted-controls-actions-events.md
+      items:
+      - name: 'Select a hosting method for your controls '
+        href: select-hosting-method-controls.md
+        items:
+        - name: Edge process (Preview)
+          href: edge-process.md
+        - name: IE process
+          href: ie-process.md
+        - name: WPF nội bộ
+          href: internal-wpf.md
+        - name: Web hosted application
+          href: web-hosted-application.md
+      - name: Tạo hoặc chỉnh sửa kiểm soát tổ chức
+        href: create-edit-hosted-control.md
+      - name: Thêm một hành động UII vào một điều khiển tổ chức
+        href: add-uii-action-hosted-control.md
+      - name: Tạo cuộc gọi hành động cho hành động UII
+        href: create-action-call-uii-action.md
+      - name: Thêm cuộc gọi hành động vào một sự kiện
+        href: add-action-calls-event.md
+      - name: Tạo sự kiện do người dùng xác định
+        href: create-user-defined-event.md
+    - name: Đặt cấu hình thanh công cụ trong ứng dụng của bạn
+      href: configure-toolbars-application.md
+    - name: Configure JAWS screen reader for Unified Service Desk
+      href: configure-jaws-screen-reader-support.md
+    - name: Đặt cấu hình phiên thông tin
+      href: configure-session-information.md
+    - name: Cấu hình và quản lý mã lệnh tổng đài viên
+      href: configure-manage-agent-scripts.md
+    - name: Customize the appearance of your application
+      href: customize-appearance-application.md
+      items:
+      - name: Customize login and splash screens in Unified Service Desk
+        href: customize-login-and-splash-screens-in-unified-service-desk.md
+      - name: Tùy chỉnh các chủ đề trong Unified Service Desk
+        href: customize-themes-in-unified-service-desk.md
+    - name: Thêm hỗ trợ đa ngôn ngữ cho ứng dụng tổng đài viên của bạn
+      href: add-multilanguage-support-agent-applications.md
+    - name: Configure Unified Service Desk to use Dynamics 365 knowledge
+      href: configure-unified-service-desk-use-dynamics-365-knowledge.md
+    - name: Configure notifications in Unified Service Desk
+      href: configure-notifications-unified-service-desk.md
+  - name: Cách đặt cấu hình Unified Service Desk
+    href: unified-service-desk-configuration-walkthroughs.md
+    items:
+    - name: 'Cách 1: Xây dựng ứng dụng tổng đài viên đơn giản'
+      href: walkthrough-1-build-a-simple-agent-application.md
+    - name: 'Cách 2: Hiển thị trang web bên ngoài trong ứng dụng tổng đài viên của bạn'
+      href: walkthrough-2-display-an-external-webpage-in-your-agent-application.md
+    - name: 'Walkthrough 3: Display Microsoft Dynamics 365 records in your agent application'
+      href: walkthrough-3-display-microsoft-dynamics-365-records-in-your-agent-application.md
+    - name: 'Walkthrough 4: Display a Microsoft Dynamics 365 record in a session in your agent application'
+      href: walkthrough-display-dynamics-365-record-session-agent-application.md
+    - name: 'Cách 5: Hiển thị thông tin phiên bổ sung bằng cách hiển thị tên và dữ liệu tổng quan về phiên'
+      href: walkthrough-5-display-enhanced-session-information-displaying-session-name-overview-data.md
+    - name: 'Hướng 6: Đặt cấu hình kiểm soát tổ chức trình gỡ lỗi trong ứng dụng tổng đài viên của bạn'
+      href: walkthrough-configure-debugger-hosted-control-agent-application.md
+    - name: 'Cách 7: Đặt cấu hình mã lệnh tổng đài viên trong ứng dụng tổng đài viên của bạn'
+      href: walkthrough-configure-agent-scripting-agent-application.md
+    - name: 'Walkthrough 8: Use Dynamics 365 knowledge base within your agent application'
+      href: walkthrough-8-use-dynamics-365-knowledge-base-within-agent-application.md
+  - name: Unified Service Desk and Unified Interface configuration walkthroughs
+    href: unified-service-desk-unified-interface-configuration-walkthroughs.md
+    items:
+    - name: 'Walkthrough 1: Build a simple agent application for Unified Interface Apps'
+      href: walkthrough1-unified-interface-build-a-simple-agent-application.md
+    - name: 'Walkthrough 2: Display an external webpage in your agent application'
+      href: walkthrough2-unified-interface-display-an-external-webpage-in-your-agent-application.md
+    - name: 'Walkthrough 3: Display Microsoft Dynamics 365 Unified Interface app records in your agent application'
+      href: walkthrough3-unified-interface-display-microsoft-dynamics-365-records-in-your-agent-application.md
+    - name: 'Walkthrough 4: Display a Microsoft Dynamics 365 Unified Interface app record in a session in your agent application'
+      href: walkthrough4-unified-interface-display-dynamics-365-record-session-agent-application.md
+    - name: 'Walkthrough 5: Display enhanced session information by displaying session name and overview data'
+      href: walkthrough5-unified-interface-display-enhanced-session-information-displaying-session-name-overview-data.md
+    - name: 'Walkthrough 6: Configure the Debugger hosted control in your agent application'
+      href: walkthrough6-unified-interface-configure-debugger-hosted-control-agent-application.md
+    - name: 'Walkthrough 7: Configure agent scripting in your agent application'
+      href: walkthrough7-unified-interface-configure-agent-scripting-agent-application.md
+- name: Mở rộng Unified Service Desk
+  href: extend-unified-service-desk.md
+  items:
+  - name: Integrate with external applications and web applications
+    href: integrate-external-applications-web-applications.md
+    items:
+    - name: Create and manage UII hosted applications
+      href: create-manage-uii-hosted-applications.md
+    - name: Use UII adapters to interact with external and web applications
+      href: use-uii-adapters-interact-external-web-applications.md
+    - name: Use UII automation adapter to interact with external and web applications
+      href: use-uii-automation-adapter-interact-external-web-applications.md
+      items:
+      - name: Hosted Application Toolkit (HAT) architecture
+        href: hosted-application-toolkit-hat-architecture.md
+      - name: Work with the HAT Software Factory
+        href: work-with-hat-software-factory.md
+        items:
+        - name: Sử dụng Nhà máy Phần mềm HAT để tạo ứng dụng được lưu trữ
+          href: use-hat-software-factory-create-hosted-application.md
+        - name: Use UII inspector to create bindings for the hosted application
+          href: use-uii-inspector-create-bindings-hosted-application.md
+        - name: Configure the hosted application
+          href: configure-hosted-application.md
+        - name: Configure an action for the hosted application
+          href: configure-action-hosted-application.md
+        - name: Deploy the hosted application to Unified Service Desk
+          href: deploy-hosted-application-unified-service-desk.md
+        - name: Import the hosted application from Unified Service Desk
+          href: import-hosted-application-from-unified-service-desk.md
+        - name: Automate hosted applications using HAT automation activities
+          href: automate-hosted-applications-using-hat-automation-activities.md
+          items:
+          - name: Sử dụng hoạt động tự động hóa HAT
+            href: use-hat-automation-activities.md
+          - name: Types of HAT automation activities
+            href: types-of-hat-automation-activities.md
+          - name: Create HAT automation
+            href: create-hat-automation.md
+      - name: Sử dụng bộ chuyển đổi định hướng dữ liệu (DDA)
+        href: use-data-driven-adapters-ddas.md
+        items:
+        - name: WinDDA
+          href: windda.md
+          items:
+          - name: Thẻ AccControl
+            href: acccontrol-tag.md
+          - name: Thẻ ACCSelector
+            href: acc-selector-tag.md
+          - name: Thẻ Tiếp theo
+            href: next-tag-windda.md
+          - name: Thẻ FindWindow
+            href: find-window-tag.md
+          - name: Sự kiện WinDDA
+            href: win-dda-events.md
+        - name: WebDDA
+          href: web-dda.md
+          items:
+          - name: AnchorElement
+            href: anchor-element.md
+          - name: ButtonElement
+            href: button-element.md
+          - name: InputElement
+            href: input-element.md
+          - name: SelectElement
+            href: select-element.md
+          - name: TextAreaElement
+            href: text-area-element.md
+          - name: HtmlElement
+            href: html-element.md
+          - name: Siêu liên kết
+            href: hyperlink.md
+          - name: Tìm kiếm Yếu tố Đường dẫn
+            href: search-path-elements.md
+          - name: AttributeMatchPath
+            href: attribute-match-path.md
+          - name: ElementMatchPath
+            href: element-match-path.md
+          - name: FindIEFrame
+            href: find-ie-frame.md
+          - name: Sự kiện WebDDA
+            href: web-dda-events.md
+        - name: UIADDA
+          href: uiadda.md
+          items:
+          - name: Trình kiểm tra Tự động hóa UI
+            href: ui-automation-inspector.md
+          - name: Thao tác FindControl
+            href: find-control-operation.md
+          - name: Thao tác Kiểm soát (Nhận/Tập hợp/Thực hiện)
+            href: control-operations-get-set-execute.md
+          - name: Đăng ký/Hủy đăng ký Hành động cho Sự kiện
+            href: register-and-unregister-action-for-event.md
+          - name: Thuật toán Điều kiện
+            href: condition-algorithm.md
+          - name: Liên kết mẫu
+            href: sample-bindings.md
+          - name: Khả năng mở rộng UIA
+            href: uia-extensibility.md
+          - name: Danh sách thuộc tính UIA
+            href: uia-property-list.md
+          - name: Danh sách Mẫu UIA
+            href: uia-pattern-list.md
+        - name: JavaDDA
+          href: javadda.md
+          items:
+          - name: Thẻ JAccControl
+            href: jacc-control-tag.md
+          - name: Thẻ JAccSelector
+            href: jacc-selector-tag.md
+          - name: Thẻ JAccTree
+            href: jacc-tree-tag.md
+          - name: Thẻ Nút Đường dẫn Tìm kiếm
+            href: search-path-node-tag.md
+          - name: Thẻ Tiếp theo
+            href: next-tag-javadda.md
+          - name: Thẻ NextRole
+            href: nextrole-tag.md
+          - name: Thẻ đường dẫn tìm kiếm FindWindow
+            href: find-window-search-path-tag.md
+          - name: Sự kiện JavaDDA
+            href: java-dda-events.md
+        - name: DDA Tổng hợp
+          href: composite-dda.md
+    - name: Use UII hosted controls with Unified Service Desk
+      href: use-uii-hosted-controls-unified-service-desk.md
+    - name: 'Cách: Tạo Bộ chuyển đổi Ứng dụng UII'
+      href: walkthrough-create-uii-application-adapter.md
+    - name: 'Cách: Tạo một Bộ chuyển đổi Ứng dụng Web UII'
+      href: walkthrough-create-uii-web-application-adapter.md
+    - name: 'Cách: Tạo một Kiểm soát Tổ chức Biểu mẫu Windows UII'
+      href: walkthrough-create-uii-windows-forms-hosted-control.md
+    - name: 'Cách: Tạo Kiểm soát Tổ chức WPF UII'
+      href: walkthrough-create-uii-wpf-hosted-control.md
+  - name: Integrate with CTI systems using CTI adapters
+    href: integrate-cti-systems-cti-adapters.md
+    items:
+    - name: Use the generic listener adapter in Unified Service Desk
+      href: use-generic-listener-adapter-unified-service-desk.md
+    - name: Build a custom CTI adapter for Unified Service Desk
+      href: build-custom-cti-adapter-unified-service-desk.md
+    - name: Tạo trình kết nối CTI
+      href: create-cti-connector.md
+    - name: Create a CTI Desktop Manager
+      href: create-cti-desktop-manager.md
+    - name: Create a CTI Control
+      href: create-cti-control.md
+    - name: Considerations for creating a CTI adapter for Unified Service Desk
+      href: consideration-creating-cti-adapter-unified-service-desk.md
+    - name: 'Cách: Sử dụng bộ chuyển đổi trình nghe chung để định tuyến sự kiện CTI'
+      href: walkthrough-use-the-generic-listener-adapter-for-cti-event-routing.md
+  - name: Integrate with Citrix applications
+    href: integrate-citrix-applications.md
+  - name: Use custom hosted control in Unified Service Desk
+    href: use-custom-hosted-control-unified-service-desk.md
+    items:
+    - name: 'Walkthrough: Create custom hosted control for Unified Service Desk'
+      href: walkthrough-create-custom-hosted-control-for-unified-service-desk.md
+    - name: Use SafeDispatcher for custom hosted controls in Unified Service Desk
+      href: use-safedispatcher-custom-hosted-controls-unified-service-desk.md
+    - name: Configure enhanced diagnostic logging for custom hosted controls
+      href: configure-enhanced-diagnostic-logging-custom-hosted-controls.md
+  - name: Create custom listeners for auditing, diagnostics and traces
+    href: create-custom-listeners-auditing-diagnostics-traces.md
+  - name: Use custom panel types and panel layouts in Unified Service Desk
+    href: use-custom-panel-types-panel-layouts-unified-service-desk.md
+    items:
+    - name: Tạo loại bảng điều khiển tùy chỉnh
+      href: create-custom-panel-type.md
+    - name: Tạo bố chục bảng điều khiển tùy chỉnh
+      href: create-custom-panel-layout.md
+    - name: Keyboard shortcuts for panels
+      href: keyboard-shortcuts-panels.md
+    - name: Display hosted controls in the custom panel layout
+      href: display-hosted-controls-custom-panel-layout.md
+    - name: Di chuyển kiểm soát tổ chức giữa các bảng điều khiển tại thời gian chạy
+      href: move-hosted-controls-between-panels-runtime.md
+  - name: Reuse Entity Search definition in your custom code
+    href: reuse-entity-search-definition-custom-code.md
+- name: Khắc phục sự cố Unified Service Desk
+  href: admin/troubleshoot-unified-service-desk.md
+  items:
+  - name: Configure client diagnostic logging in Unified Service Desk
+    href: admin/configure-client-diagnostic-logging-unified-service-desk.md
+    items:
+    - name: Cách Unified Service Desk xử lý các lỗi về ứng dụng và hệ thống
+      href: admin/how-unified-service-desk-handles-application-system-errors.md
+  - name: Khắc phục sự cố trong Unified Service Desk
+    href: debug-issues-unified-service-desk.md
+    items:
+    - name: Use the Debugger control in Unified Service Desk
+      href: use-debugger-control-unified-service-desk.md
+    - name: Debug your custom code for Unified Service Desk
+      href: debug-custom-code-unified-service-desk.md
+- name: Tham chiếu loại kiểm soát tổ chức và hoạt động/sự kiện
+  href: hosted-control-types-action-event-reference.md
+  items:
+  - name: Trình quản lý kết nối (Kiểm soát tổ chức)
+    href: connection-manager-hosted-control.md
+  - name: Trình quản lý chung (Kiểm soát tổ chức)
+    href: global-manager-hosted-control.md
+  - name: Mã lệnh tổng đài viên (Kiểm soát tổ chức)
+    href: agent-scripting-hosted-control.md
+  - name: Hộp thoại CRM (Kiểm soát tổ chức)
+    href: crm-dialog-hosted-control.md
+  - name: Trang CRM (Kiểm soát tổ chức)
+    href: crm-page-hosted-control.md
+  - name: Trình quản lý máy tính để bàn CTI (Kiểm soát tổ chức)
+    href: cti-desktop-manager-hosted-control.md
+  - name: Trình gỡ lỗi (Kiểm soát tổ chức)
+    href: debugger-hosted-control.md
+  - name: Interactive Service Hub Page (Hosted Control)
+    href: interactive-service-hub-page-hosted-control.md
+  - name: Unified Interface KM Control (Hosted Control)
+    href: unified-interface-km-control-hosted-control.md
+  - name: Kiểm soát KM (Kiểm soát Tổ chức)
+    href: km-control-hosted-control.md
+  - name: Listener Hosted Control (Hosted Control)
+    href: listener-hosted-control-hosted-control.md
+  - name: Bố cục bảng điều khiển (Kiểm soát tổ chức)
+    href: panel-layout-hosted-control.md
+  - name: Popup Notification (Hosted Control)
+    href: popup-notification-hosted-control.md
+  - name: Dòng phiên (Kiểm soát tổ chức)
+    href: session-lines-hosted-control.md
+  - name: Tab Phiên (Kiểm soát tổ chức)
+    href: session-tabs-hosted-control.md
+  - name: Ứng dụng Web tiêu chuẩn (Kiểm soát tổ chức)
+    href: standard-web-application-hosted-control.md
+  - name: Bộ chứa Thanh công cụ (Kiểm soát tổ chức)
+    href: toolbar-container-hosted-control.md
+  - name: Unified Interface Page (Hosted Control)
+    href: unified-interface-page-hosted-control.md
+  - name: Ghi chú của người dùng (Kiểm soát tổ chức)
+    href: user-notes-hosted-control.md
+  - name: Kiểm soát tổ chức USD (Kiểm soát tổ chức)
+    href: usd-hosted-control-hosted-control.md
+  - name: Ứng dụng Được tổ chức CCA (Kiểm soát tổ chức)
+    href: cca-hosted-application-hosted-control.md
+  - name: Session Timer (Custom Hosted Control)
+    href: session-timer-custom-hosted-control.md
+- name: Trợ năng trong Unified Service Desk for Microsoft Dynamics 365
+  href: admin/accessibility-unified-service-desk-microsoft-dynamics-365.md
+- name: Known issues and limitations of Unified Service Desk
+  href: release-notes.md
+ms.openlocfilehash: 6f15556cb284e92704c27a7c6ee20c8192a3556e
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "387063"

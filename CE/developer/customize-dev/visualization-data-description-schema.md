@@ -1,0 +1,102 @@
+---
+title: Visualization data description schema (Developer Guide for Dynamics 365 for Customer Engagement) | MicrosoftDocs
+description: 'The following is the schema for the data description XML string for charts in visualization. This can be used to validate the contents of the data description XML string while creating a chart. '
+ms.custom: ''
+ms.date: 12/22/2017
+ms.reviewer: ''
+ms.service: crm-online
+ms.suite: ''
+ms.tgt_pltfrm: ''
+ms.topic: article
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+ms.assetid: c923e9fd-c687-4671-9ffd-1306da9f80d8
+caps.latest.revision: 14
+author: KumarVivek
+ms.author: kvivek
+manager: amyla
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: 90f2ebaa0e8fd4ebb7f0c8f3910f1592427d96dd
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "386656"
+---
+# <a name="visualization-data-description-schema"></a><span data-ttu-id="d8c9f-104">Visualization data description schema</span><span class="sxs-lookup"><span data-stu-id="d8c9f-104">Visualization data description schema</span></span>
+
+[!INCLUDE[](../../includes/cc_applies_to_update_9_0_0.md)]
+
+<span data-ttu-id="d8c9f-105">The following is the schema for the data description XML string for charts in visualization.</span><span class="sxs-lookup"><span data-stu-id="d8c9f-105">The following is the schema for the data description XML string for charts in visualization.</span></span> <span data-ttu-id="d8c9f-106">This can be used to validate the contents of the data description XML string while creating a chart.</span><span class="sxs-lookup"><span data-stu-id="d8c9f-106">This can be used to validate the contents of the data description XML string while creating a chart.</span></span> <span data-ttu-id="d8c9f-107">For more information, see [Understanding Charts: Underlying Data and Chart Representation](understand-charts-underlying-data-chart-representation.md).</span><span class="sxs-lookup"><span data-stu-id="d8c9f-107">For more information, see [Understanding Charts: Underlying Data and Chart Representation](understand-charts-underlying-data-chart-representation.md).</span></span> [!INCLUDE[schema_download](../../includes/schema-download.md)] <span data-ttu-id="d8c9f-108">and see the file `VisualizationDataDescription.xsd` in the folder.</span><span class="sxs-lookup"><span data-stu-id="d8c9f-108">and see the file `VisualizationDataDescription.xsd` in the folder.</span></span>  
+  
+## <a name="schema"></a><span data-ttu-id="d8c9f-109">Sơ đồ</span><span class="sxs-lookup"><span data-stu-id="d8c9f-109">Schema</span></span>  
+  
+```xml  
+<?xml version='1.0' encoding='utf-8'?>  
+<xs:schema attributeFormDefault='unqualified'  
+           elementFormDefault='qualified'  
+           xmlns:xs='http://www.w3.org/2001/XMLSchema'>  
+ <xs:element name='datadefinition'>  
+  <xs:complexType>  
+   <xs:sequence>  
+    <xs:element name='fetchcollection'>  
+     <xs:complexType>  
+      <xs:sequence>  
+       <xs:element maxOccurs='unbounded'  
+                   name='fetch'>  
+        <xs:annotation>  
+         <!--FetchXML goes here-->  
+        </xs:annotation>  
+       </xs:element>  
+      </xs:sequence>  
+     </xs:complexType>  
+    </xs:element>  
+    <xs:element name='categorycollection'>  
+     <xs:complexType>  
+      <xs:sequence>  
+       <xs:element name='category'  
+                   type='CategoryType'  
+                   minOccurs='1'  
+                   maxOccurs='unbounded' />  
+      </xs:sequence>  
+     </xs:complexType>  
+    </xs:element>  
+   </xs:sequence>  
+  </xs:complexType>  
+ </xs:element>  
+ <xs:complexType name ='CategoryType'>  
+  <xs:sequence>  
+   <xs:element minOccurs='1'  
+               maxOccurs='unbounded'  
+               name='measurecollection'>  
+    <xs:complexType>  
+     <xs:sequence>  
+      <xs:element minOccurs='1'  
+                  maxOccurs='unbounded'  
+                  name='measure'>  
+       <xs:complexType>  
+        <xs:attribute name='alias'  
+                      type='xs:string'  
+                      use='required' />  
+       </xs:complexType>  
+      </xs:element>  
+     </xs:sequence>  
+    </xs:complexType>  
+   </xs:element>  
+  </xs:sequence>  
+  <xs:attribute name='alias'  
+                type='xs:string'  
+                use='optional' />  
+ </xs:complexType>  
+</xs:schema>  
+```  
+  
+### <a name="see-also"></a><span data-ttu-id="d8c9f-110">Xem thêm</span><span class="sxs-lookup"><span data-stu-id="d8c9f-110">See also</span></span>  
+ <span data-ttu-id="d8c9f-111">[Customize Visualizations and Dashboards](customize-visualizations-dashboards.md) </span><span class="sxs-lookup"><span data-stu-id="d8c9f-111">[Customize Visualizations and Dashboards](customize-visualizations-dashboards.md) </span></span>  
+ <span data-ttu-id="d8c9f-112">[Schemas Used in Microsoft Dynamics 365 for Customer Engagement](../schemas-used-dynamics-365.md) </span><span class="sxs-lookup"><span data-stu-id="d8c9f-112">[Schemas Used in Microsoft Dynamics 365 for Customer Engagement](../schemas-used-dynamics-365.md) </span></span>  
+ <span data-ttu-id="d8c9f-113">[Understanding Charts: Underlying Data and Chart Representation](understand-charts-underlying-data-chart-representation.md) </span><span class="sxs-lookup"><span data-stu-id="d8c9f-113">[Understanding Charts: Underlying Data and Chart Representation](understand-charts-underlying-data-chart-representation.md) </span></span>  
+ <span data-ttu-id="d8c9f-114">[Sample Charts](sample-charts.md) </span><span class="sxs-lookup"><span data-stu-id="d8c9f-114">[Sample Charts](sample-charts.md) </span></span>  
+ [<span data-ttu-id="d8c9f-115">Use FetchXML to Construct a Query</span><span class="sxs-lookup"><span data-stu-id="d8c9f-115">Use FetchXML to Construct a Query</span></span>](../org-service/use-fetchxml-construct-query.md)

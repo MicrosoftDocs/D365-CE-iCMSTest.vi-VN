@@ -1,0 +1,48 @@
+---
+title: Asynchronous service architecture (Developer Guide for Dynamics 365 for Customer Engagement apps)| MicrosoftDocs
+description: 'The system architecture can be divided into three major components: the core system, which features the event execution pipeline, the database component, which hosts the asynchronous queue, and the asynchronous service. One benefit of the scalable architecture of Dynamics 365 for Customer Engagement apps is that the asynchronous service can be hosted on servers other than the Dynamics 365 for Customer Engagement server, resulting in improved performance.'
+ms.custom: ''
+ms.date: 10/31/2017
+ms.reviewer: ''
+ms.service: crm-online
+ms.suite: ''
+ms.tgt_pltfrm: ''
+ms.topic: article
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+helpviewer_keywords:
+- asynchronous operations, asynchronous operations, architecture
+ms.assetid: e4117ff8-8a4d-4919-af78-0b8b7d15433a
+caps.latest.revision: 13
+author: JimDaly
+ms.author: jdaly
+manager: amyla
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: 9fa11c6ca3bfca202a8068a2c502d788c84e905c
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "387230"
+---
+# <a name="asynchronous-service-architecture"></a><span data-ttu-id="c8fbb-104">Asynchronous service architecture</span><span class="sxs-lookup"><span data-stu-id="c8fbb-104">Asynchronous service architecture</span></span>
+
+[!INCLUDE[](../includes/cc_applies_to_update_9_0_0.md)]
+
+<span data-ttu-id="c8fbb-105">The [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps system architecture can be divided into three major components: the core system, which features the event execution pipeline, the database component, which hosts the asynchronous queue, and the asynchronous service.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-105">The [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps system architecture can be divided into three major components: the core system, which features the event execution pipeline, the database component, which hosts the asynchronous queue, and the asynchronous service.</span></span> <span data-ttu-id="c8fbb-106">One benefit of the scalable architecture of [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps is that the asynchronous service can be hosted on servers other than the [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps server, resulting in improved performance.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-106">One benefit of the scalable architecture of [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps is that the asynchronous service can be hosted on servers other than the [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps server, resulting in improved performance.</span></span>  <span data-ttu-id="c8fbb-107">For more information, see the architecture diagram in [Event Execution Pipeline](event-execution-pipeline.md).</span><span class="sxs-lookup"><span data-stu-id="c8fbb-107">For more information, see the architecture diagram in [Event Execution Pipeline](event-execution-pipeline.md).</span></span>  
+  
+ <span data-ttu-id="c8fbb-108">Register plug-ins for asynchronous events when they have to perform lots of processing or for functions that are not time critical.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-108">Register plug-ins for asynchronous events when they have to perform lots of processing or for functions that are not time critical.</span></span> <span data-ttu-id="c8fbb-109">Registering a plug-in that performs lots of processing for a synchronous event can adversely affect the performance of [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-109">Registering a plug-in that performs lots of processing for a synchronous event can adversely affect the performance of [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps.</span></span>  
+  
+ <span data-ttu-id="c8fbb-110">You should stop the asynchronous service before you unregister a plug-in that was registered to execute asynchronously.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-110">You should stop the asynchronous service before you unregister a plug-in that was registered to execute asynchronously.</span></span> <span data-ttu-id="c8fbb-111">Stopping the service prevents a situation where an asynchronous registered plug-in has been queued for execution but for which there is no plug-in assembly currently registered.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-111">Stopping the service prevents a situation where an asynchronous registered plug-in has been queued for execution but for which there is no plug-in assembly currently registered.</span></span> <span data-ttu-id="c8fbb-112">For example, consider the situation in which a plug-in has been registered to execute asynchronously and the related event has fired.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-112">For example, consider the situation in which a plug-in has been registered to execute asynchronously and the related event has fired.</span></span> <span data-ttu-id="c8fbb-113">After the asynchronous operation has been queued by the queue manager, you then unregister (delete) the plug-in assembly from the [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps database.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-113">After the asynchronous operation has been queued by the queue manager, you then unregister (delete) the plug-in assembly from the [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps database.</span></span> <span data-ttu-id="c8fbb-114">In this case, an error occurs when the asynchronous service tries to execute the queued asynchronous operation but the plug-in assembly no longer exists.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-114">In this case, an error occurs when the asynchronous service tries to execute the queued asynchronous operation but the plug-in assembly no longer exists.</span></span>  
+  
+## <a name="queue-manager"></a><span data-ttu-id="c8fbb-115">Queue manager</span><span class="sxs-lookup"><span data-stu-id="c8fbb-115">Queue manager</span></span>  
+ <span data-ttu-id="c8fbb-116">The queue manager  creates and manages asynchronous operations that are sent to the asynchronous service either from the event execution pipeline or directly by a Web service call.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-116">The queue manager  creates and manages asynchronous operations that are sent to the asynchronous service either from the event execution pipeline or directly by a Web service call.</span></span> <span data-ttu-id="c8fbb-117">When an event is raised in the event execution pipeline, and if one or more plug-ins are registered for that event, the queue manager creates a new asynchronous operation in the queue.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-117">When an event is raised in the event execution pipeline, and if one or more plug-ins are registered for that event, the queue manager creates a new asynchronous operation in the queue.</span></span> <span data-ttu-id="c8fbb-118">Throughout the lifetime of the asynchronous operation, its status may change multiple times from creation until it is completed.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-118">Throughout the lifetime of the asynchronous operation, its status may change multiple times from creation until it is completed.</span></span> <span data-ttu-id="c8fbb-119">The queue manager runs as part of the asynchronous service and manages the state changes of the asynchronous operations.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-119">The queue manager runs as part of the asynchronous service and manages the state changes of the asynchronous operations.</span></span> <span data-ttu-id="c8fbb-120">A part of the queue manager, known as the asynchronous queue agent, is located on the [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps server.</span><span class="sxs-lookup"><span data-stu-id="c8fbb-120">A part of the queue manager, known as the asynchronous queue agent, is located on the [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps server.</span></span>  
+  
+### <a name="see-also"></a><span data-ttu-id="c8fbb-121">Xem thêm</span><span class="sxs-lookup"><span data-stu-id="c8fbb-121">See also</span></span>  
+ <span data-ttu-id="c8fbb-122">[Register and Deploy Plug-ins](register-deploy-plugins.md) </span><span class="sxs-lookup"><span data-stu-id="c8fbb-122">[Register and Deploy Plug-ins](register-deploy-plugins.md) </span></span>  
+ <span data-ttu-id="c8fbb-123">[Walkthrough: Stop and Start the Asynchronous Service](stop-start-asynchronous-service.md) </span><span class="sxs-lookup"><span data-stu-id="c8fbb-123">[Walkthrough: Stop and Start the Asynchronous Service](stop-start-asynchronous-service.md) </span></span>  
+ <span data-ttu-id="c8fbb-124">[Asynchronous Service in Dynamics 365 for Customer Engagement apps](asynchronous-service.md) </span><span class="sxs-lookup"><span data-stu-id="c8fbb-124">[Asynchronous Service in Dynamics 365 for Customer Engagement apps](asynchronous-service.md) </span></span>  
+ [<span data-ttu-id="c8fbb-125">AsyncOperation (system job) entity</span><span class="sxs-lookup"><span data-stu-id="c8fbb-125">AsyncOperation (system job) entity</span></span>](asyncoperation-system-job-entity.md)

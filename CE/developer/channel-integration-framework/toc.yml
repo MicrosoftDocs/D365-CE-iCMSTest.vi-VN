@@ -1,0 +1,96 @@
+items:
+- name: Dynamics 365 Channel Integration Framework
+  href: channel-integration-framework.md
+  items:
+  - name: Tổng quan
+    items:
+    - name: What is Channel Integration Framework?
+      href: overview-channel-integration-framework.md
+    - name: Architecture overview of Channel Integration Framework (CIF)
+      href: architecture-overview-channel-integration-framework.md
+    - name: System requirements of Channel Integration Framework
+      href: system-requirements-channel-integration-framework.md
+  - name: Nội dung mới
+    href: whats-new-channel-integration-framework.md
+  - name: Get the application
+    items:
+    - name: Get Channel Integration Framework (CIF)
+      href: get-channel-integration-framework.md
+    - name: Sample softphone integration
+      href: sample-softphone-integration.md
+  - name: How-to
+    items:
+    - name: Configure channel provider for your Dynamics 365 organization
+      href: configure-channel-provider-channel-integration-framework.md
+    - name: Enable outbound communication (ClickToAct)
+      href: enable-outbound-communication-clicktoact.md
+    - name: Add CIF solution as a dependent solution
+      href: add-cif-solution-dependent-solution.md
+    - name: Authenticate channel users to the channel (widget)
+      href: authenticate-channel-users.md
+    - name: Pass Dynamics 365 URL to widget library
+      href: pass-url-widget-library.md
+  - name: JavaScript API Reference
+    items:
+    - name: Microsoft.CIFramework
+      href: reference/microsoft-ciframework.md
+      items:
+      - name: setWidth
+        href: reference/microsoft-ciframework/setWidth.md
+      - name: getWidth
+        href: reference/microsoft-ciframework/getWidth.md
+      - name: getEntityMetadata
+        href: reference/microsoft-ciframework/getEntityMetadata.md
+      - name: setMode
+        href: reference/microsoft-ciframework/setMode.md
+      - name: getMode
+        href: reference/microsoft-ciframework/getMode.md
+      - name: setClickToAct
+        href: reference/microsoft-ciframework/setClickToAct.md
+      - name: getClickToAct
+        href: reference/microsoft-ciframework/getClickToAct.md
+      - name: searchAndOpenRecords
+        href: reference/microsoft-ciframework/searchAndOpenRecords.md
+      - name: getEnvironment
+        href: reference/microsoft-ciframework/getEnvironment.md
+      - name: openForm
+        href: reference/microsoft-ciframework/openForm.md
+      - name: renderSearchPage
+        href: reference/microsoft-ciframework/renderSearchPage.md
+      - name: createRecord
+        href: reference/microsoft-ciframework/createRecord.md
+      - name: retrieveRecord
+        href: reference/microsoft-ciframework/retrieveRecord.md
+      - name: updateRecord
+        href: reference/microsoft-ciframework/updateRecord.md
+      - name: deleteRecord
+        href: reference/microsoft-ciframework/deleteRecord.md
+      - name: addHandler
+        href: reference/microsoft-ciframework/addHandler.md
+      - name: removeHandler
+        href: reference/microsoft-ciframework/removeHandler.md
+    - name: Client-side events
+      href: reference/client-side-events.md
+      items:
+      - name: onclicktoact
+        href: reference/events/onclicktoact.md
+      - name: onmodechanged
+        href: reference/events/onmodechanged.md
+      - name: onpagenavigate
+        href: reference/events/onpagenavigate.md
+      - name: onsendkbarticle
+        href: reference/events/onsendkbarticle.md
+      - name: onsizechanged
+        href: reference/events/onsizechanged.md
+    - name: Tham chiếu thực thể
+      items:
+      - name: msdyn_ciprovider
+        href: reference/entities-attributes/msdyn-ciprovider.md
+  - name: CÂU HỎI THƯỜNG GẶP
+    href: faq-channel-integration-framework.md
+ms.openlocfilehash: ca4a108317b335c7ffddeb6934f58d7908736817
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "387682"

@@ -1,0 +1,54 @@
+---
+title: Administration Guide for Unified Service Desk 3.0 for Dynamics 365 for Customer Engagement apps | MicrosoftDocs
+ms.custom:
+- dyn365-USD
+ms.date: 08/23/2017
+ms.reviewer: ''
+ms.service: dynamics-365-customerservice
+ms.suite: ''
+ms.tgt_pltfrm: ''
+ms.topic: article
+applies_to:
+- Dynamics 365 for Customer Engagement apps
+- Dynamics 365 for Customer Engagement (on-premises) apps
+- Dynamics CRM 2013
+- Dynamics CRM 2015
+- Dynamics CRM 2016
+ms.assetid: ca6478de-7ba1-4089-a137-65e772d2b67e
+author: kabala123
+ms.author: kabala
+manager: shujoshi
+tags:
+- MigrationHO
+- LinksOnlyTopic
+search.audienceType:
+- customizer
+- developer
+search.app:
+- D365CE
+- D365USD
+ms.openlocfilehash: 38e9359f9095e5893cfb1f6d5fc8ee29dcdbffb4
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "387247"
+---
+# <a name="administration-guide-for-unified-service-desk-30"></a><span data-ttu-id="8b02b-102">Hướng dẫn Quản trị dành cho Unified Service Desk 3.0</span><span class="sxs-lookup"><span data-stu-id="8b02b-102">Administration Guide for Unified Service Desk 3.0</span></span>
+<span data-ttu-id="8b02b-103">This guide provides information about how to install, administer, and manage [!INCLUDE[pn_unified_service_desk](../includes/pn-unified-service-desk.md)] for [!INCLUDE[pn_CRM_Online](../includes/pn-crm-online.md)] apps and [!INCLUDE[pn_crm_op_edition](../includes/pn-crm-onprem.md)] apps.</span><span class="sxs-lookup"><span data-stu-id="8b02b-103">This guide provides information about how to install, administer, and manage [!INCLUDE[pn_unified_service_desk](../includes/pn-unified-service-desk.md)] for [!INCLUDE[pn_CRM_Online](../includes/pn-crm-online.md)] apps and [!INCLUDE[pn_crm_op_edition](../includes/pn-crm-onprem.md)] apps.</span></span> <span data-ttu-id="8b02b-104">Bạn có thể sử dụng [!INCLUDE[pn_unified_service_desk](../includes/pn-unified-service-desk.md)] để đặt cấu hình và quản lý ứng dụng tổng đài viên trung tâm cuộc gọi cung cấp cho tổng đài viên dịch vụ khách hàng của bạn quyền truy cập ngay lập tức và hợp nhất vào thông tin kinh doanh quan trọng về khách hàng của bạn giúp họ xử lý tương tác khách hàng có hiệu quả.</span><span class="sxs-lookup"><span data-stu-id="8b02b-104">You can use [!INCLUDE[pn_unified_service_desk](../includes/pn-unified-service-desk.md)] to configure and manage call center agent applications that provide your customer service agents with immediate and unified access to business critical information about your customers that helps them effectively handle their customer interactions.</span></span>  
+  
+  
+## <a name="in-this-section"></a><span data-ttu-id="8b02b-105">In this section</span><span class="sxs-lookup"><span data-stu-id="8b02b-105">In this section</span></span>  
+ [<span data-ttu-id="8b02b-106">Nội dung mới trong Unified Service Desk</span><span class="sxs-lookup"><span data-stu-id="8b02b-106">What's new in Unified Service Desk</span></span>](../unified-service-desk/admin/whats-new-unified-service-desk-administrators.md)  
+  
+ [<span data-ttu-id="8b02b-107">Tổng quan về Unified Service Desk</span><span class="sxs-lookup"><span data-stu-id="8b02b-107">Overview of Unified Service Desk</span></span>](../unified-service-desk/admin/overview-unified-service-desk.md)  
+  
+ [<span data-ttu-id="8b02b-108">Install and Deploy Unified Service Desk</span><span class="sxs-lookup"><span data-stu-id="8b02b-108">Install and Deploy Unified Service Desk</span></span>](../unified-service-desk/admin/install-upgrade-deploy-unified-service-desk.md)  
+  
+ [<span data-ttu-id="8b02b-109">Update Unified Service Desk solution</span><span class="sxs-lookup"><span data-stu-id="8b02b-109">Update Unified Service Desk solution</span></span>](../unified-service-desk/admin/update-unified-service-desk-solution.md)  
+  
+ [<span data-ttu-id="8b02b-110">Bảo mật trong Unified Service Desk</span><span class="sxs-lookup"><span data-stu-id="8b02b-110">Security in Unified Service Desk</span></span>](../unified-service-desk/admin/security-unified-service-desk.md)  
+  
+ [<span data-ttu-id="8b02b-111">Quản trị và quản lý Unified Service Desk</span><span class="sxs-lookup"><span data-stu-id="8b02b-111">Administer and manage Unified Service Desk</span></span>](../unified-service-desk/admin/administer-manage-unified-service-desk.md)  
+  
+ [<span data-ttu-id="8b02b-112">Khắc phục sự cố Unified Service Desk</span><span class="sxs-lookup"><span data-stu-id="8b02b-112">Troubleshoot Unified Service Desk</span></span>](../unified-service-desk/admin/troubleshoot-unified-service-desk.md)  
