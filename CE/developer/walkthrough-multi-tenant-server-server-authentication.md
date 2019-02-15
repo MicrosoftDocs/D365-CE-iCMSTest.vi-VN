@@ -1,0 +1,588 @@
+---
+title: 'Walkthrough: Multi-tenant server-to-server authentication (Developer Guide for Dynamics 365 for Customer Engagement apps)| MicrosoftDocs'
+description: This walkthrough describes the steps to create a multi-tenant web application that can connect to a December 2016 Update for Dynamics 365 for Customer Engagement (online) tenant using the Visual Studio 2015 MVC web application template
+ms.custom: ''
+ms.date: 09/27/2018
+ms.reviewer: ''
+ms.service: crm-online
+ms.suite: ''
+ms.tgt_pltfrm: ''
+ms.topic: article
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+ms.assetid: 9d09f7e8-c1fc-45c8-9755-ac17785f0818
+caps.latest.revision: 8
+author: paulliew
+ms.author: jdaly
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: 54e22307f4fb4353bce3f29c021648ac98d69429
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "388381"
+---
+# <a name="walkthrough-multi-tenant-server-to-server-authentication"></a><span data-ttu-id="dc1d7-103">Walkthrough: Multi-tenant server-to-server authentication</span><span class="sxs-lookup"><span data-stu-id="dc1d7-103">Walkthrough: Multi-tenant server-to-server authentication</span></span>
+
+[!INCLUDE[](../includes/cc_applies_to_update_9_0_0.md)]
+
+<span data-ttu-id="dc1d7-104">This walkthrough will describe the steps to create a multi-tenant web application that can connect to a [!INCLUDE[pn_crm_8_2_0_online](../includes/pn-crm-8-2-0-online.md)] tenant using the [!INCLUDE[pn_microsoft_visual_studio_2015](../includes/pn-microsoft-visual-studio-2015.md)] MVC web application template.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-104">This walkthrough will describe the steps to create a multi-tenant web application that can connect to a [!INCLUDE[pn_crm_8_2_0_online](../includes/pn-crm-8-2-0-online.md)] tenant using the [!INCLUDE[pn_microsoft_visual_studio_2015](../includes/pn-microsoft-visual-studio-2015.md)] MVC web application template.</span></span>  
+  
+<a name="bkmk_Requirements"></a>
+
+## <a name="requirements"></a><span data-ttu-id="dc1d7-105">Yêu cầu</span><span class="sxs-lookup"><span data-stu-id="dc1d7-105">Requirements</span></span>  
+  
+- [!INCLUDE[pn_visual_studio_2015](../includes/pn-visual-studio-2015.md)] <span data-ttu-id="dc1d7-106">with web developer tools installed</span><span class="sxs-lookup"><span data-stu-id="dc1d7-106">with web developer tools installed</span></span>  
+  
+- <span data-ttu-id="dc1d7-107">A [!INCLUDE[pn_crm_8_2_0_online](../includes/pn-crm-8-2-0-online.md)] tenant associated with your [!INCLUDE[pn_azure_active_directory](../includes/pn-azure-active-directory.md)] (Azure AD) tenant.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-107">A [!INCLUDE[pn_crm_8_2_0_online](../includes/pn-crm-8-2-0-online.md)] tenant associated with your [!INCLUDE[pn_azure_active_directory](../includes/pn-azure-active-directory.md)] (Azure AD) tenant.</span></span>  
+  
+- <span data-ttu-id="dc1d7-108">A second [!INCLUDE[pn_crm_8_2_0_online](../includes/pn-crm-8-2-0-online.md)] tenant associated with a different Azure AD tenant.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-108">A second [!INCLUDE[pn_crm_8_2_0_online](../includes/pn-crm-8-2-0-online.md)] tenant associated with a different Azure AD tenant.</span></span>  <span data-ttu-id="dc1d7-109">This tenant represents a subscriber to your application.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-109">This tenant represents a subscriber to your application.</span></span> <span data-ttu-id="dc1d7-110">This can be a trial [!INCLUDE[pn_crm_8_2_0_online](../includes/pn-crm-8-2-0-online.md)] subscription.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-110">This can be a trial [!INCLUDE[pn_crm_8_2_0_online](../includes/pn-crm-8-2-0-online.md)] subscription.</span></span>  
+  
+<a name="bkmk_goal"></a>
+
+## <a name="goal-of-this-walkthrough"></a><span data-ttu-id="dc1d7-111">Goal of this walkthrough</span><span class="sxs-lookup"><span data-stu-id="dc1d7-111">Goal of this walkthrough</span></span>
+
+ <span data-ttu-id="dc1d7-112">When you complete this walkthrough you will have an MVC web application which will use the [WhoAmIRequest Class](http://msdn.microsoft.com/en-us/0daeeabf-e8ec-4df1-a320-7aadef191d4c) to retrieve data about the user the application uses to connect to the [!INCLUDE[pn_dyn_365_online](../includes/pn-crm-online.md)]apps tenant.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-112">When you complete this walkthrough you will have an MVC web application which will use the [WhoAmIRequest Class](http://msdn.microsoft.com/en-us/0daeeabf-e8ec-4df1-a320-7aadef191d4c) to retrieve data about the user the application uses to connect to the [!INCLUDE[pn_dyn_365_online](../includes/pn-crm-online.md)]apps tenant.</span></span>  
+  
+ <span data-ttu-id="dc1d7-113">When you run the app successfully you will see a **Sign in** command in the top right corner.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-113">When you run the app successfully you will see a **Sign in** command in the top right corner.</span></span>  
+  
+ <span data-ttu-id="dc1d7-114">![The sign in command in the app](media/mvc-s2s-walkthrough-app-sign-in.PNG "The sign in command in the app")</span><span class="sxs-lookup"><span data-stu-id="dc1d7-114">![The sign in command in the app](media/mvc-s2s-walkthrough-app-sign-in.PNG "The sign in command in the app")</span></span>  
+  
+ <span data-ttu-id="dc1d7-115">Click the **Sign in** command and you will be directed to Azure AD for your credentials.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-115">Click the **Sign in** command and you will be directed to Azure AD for your credentials.</span></span>  
+  
+ <span data-ttu-id="dc1d7-116">After you sign in, you will see there is a **WhoAmI** command.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-116">After you sign in, you will see there is a **WhoAmI** command.</span></span>  
+  
+ <span data-ttu-id="dc1d7-117">![The WhoAmI command](media/mvc-s2s-walkthrough-app-whoami.png "The WhoAmI command")</span><span class="sxs-lookup"><span data-stu-id="dc1d7-117">![The WhoAmI command](media/mvc-s2s-walkthrough-app-whoami.png "The WhoAmI command")</span></span>  
+  
+ <span data-ttu-id="dc1d7-118">Click **WhoAmI**, and you should see the following:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-118">Click **WhoAmI**, and you should see the following:</span></span>  
+  
+ <span data-ttu-id="dc1d7-119">![Results of a WhoAmI request](media/mvc-s2s-walkthrough-app-whoami-results.PNG "Results of a WhoAmI request")</span><span class="sxs-lookup"><span data-stu-id="dc1d7-119">![Results of a WhoAmI request](media/mvc-s2s-walkthrough-app-whoami-results.PNG "Results of a WhoAmI request")</span></span>  
+  
+ <span data-ttu-id="dc1d7-120">When you query your [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] tenant you will see that the results returned from the WhoAmI message refer to  a specific application user account you have configured for the web application to use rather than the user account you are currently using.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-120">When you query your [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] tenant you will see that the results returned from the WhoAmI message refer to  a specific application user account you have configured for the web application to use rather than the user account you are currently using.</span></span>  
+  
+<a name="bkmk_VerifyAADTenant"></a>
+
+## <a name="verify-azure-ad-tenant"></a><span data-ttu-id="dc1d7-121">Verify Azure AD tenant</span><span class="sxs-lookup"><span data-stu-id="dc1d7-121">Verify Azure AD tenant</span></span>
+
+ <span data-ttu-id="dc1d7-122">Before you begin, connect to your [!INCLUDE[pn_office_365_admin_center](../includes/pn-office-365-admin-center.md)][https://portal.office.com](https://portal.office.com) and in the **Admin centers** drop-down, verify that you see both [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] and **Azure AD**.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-122">Before you begin, connect to your [!INCLUDE[pn_office_365_admin_center](../includes/pn-office-365-admin-center.md)][https://portal.office.com](https://portal.office.com) and in the **Admin centers** drop-down, verify that you see both [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] and **Azure AD**.</span></span>  
+  
+ <span data-ttu-id="dc1d7-123">![Admin Centers with Azure Active Directory and Dynamics 365 for Customer Engagement](media/admin-centers-with-aad-crm.png "Admin Centers with Azure Active Directory and Dynamics 365 for Customer Engagement")</span><span class="sxs-lookup"><span data-stu-id="dc1d7-123">![Admin Centers with Azure Active Directory and Dynamics 365 for Customer Engagement](media/admin-centers-with-aad-crm.png "Admin Centers with Azure Active Directory and Dynamics 365 for Customer Engagement")</span></span>  
+  
+ <span data-ttu-id="dc1d7-124">If your Azure AD subscription is not associated with a [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] subscription, you will not be able to grant privileges for your application to access [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] data.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-124">If your Azure AD subscription is not associated with a [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] subscription, you will not be able to grant privileges for your application to access [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] data.</span></span>  
+  
+ <span data-ttu-id="dc1d7-125">If you do not see this option, see [Register your free Azure Active Directory subscription](https://support.office.com/article/Register-your-free-Azure-Active-Directory-subscription-d104fb44-1c42-4541-89a6-1f67be22e4ad) for information about how to register to get your Azure AD subscription.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-125">If you do not see this option, see [Register your free Azure Active Directory subscription](https://support.office.com/article/Register-your-free-Azure-Active-Directory-subscription-d104fb44-1c42-4541-89a6-1f67be22e4ad) for information about how to register to get your Azure AD subscription.</span></span>  
+  
+ <span data-ttu-id="dc1d7-126">If you already have an Azure subscription but it isn’t associated with your [!INCLUDE[pn_MS_Office_365](../includes/pn-ms-office-365.md)] account, see [Associate your Office 365 account with Azure AD](https://msdn.microsoft.com/office/office365/howto/setup-development-environment) to create and manage apps.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-126">If you already have an Azure subscription but it isn’t associated with your [!INCLUDE[pn_MS_Office_365](../includes/pn-ms-office-365.md)] account, see [Associate your Office 365 account with Azure AD](https://msdn.microsoft.com/office/office365/howto/setup-development-environment) to create and manage apps.</span></span>  
+  
+<a name="bkmk_createMVCWebApp"></a>
+
+## <a name="create-an-mvc-web-application"></a><span data-ttu-id="dc1d7-127">Create an MVC web application</span><span class="sxs-lookup"><span data-stu-id="dc1d7-127">Create an MVC web application</span></span>
+
+ <span data-ttu-id="dc1d7-128">Using [!INCLUDE[pn_visual_studio_2015](../includes/pn-visual-studio-2015.md)], you can create a new MVC web application and register it with your Azure AD tenant.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-128">Using [!INCLUDE[pn_visual_studio_2015](../includes/pn-visual-studio-2015.md)], you can create a new MVC web application and register it with your Azure AD tenant.</span></span>  
+  
+1. <span data-ttu-id="dc1d7-129">Open [!INCLUDE[pn_visual_studio_2015](../includes/pn-visual-studio-2015.md)].</span><span class="sxs-lookup"><span data-stu-id="dc1d7-129">Open [!INCLUDE[pn_visual_studio_2015](../includes/pn-visual-studio-2015.md)].</span></span>  
+  
+2. <span data-ttu-id="dc1d7-130">Make sure that the [!INCLUDE[pn_Windows_Live_ID](../includes/pn-windows-live-id.md)] you are signed in as is the same one with access to the Azure AD tenant you want to use to register your application.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-130">Make sure that the [!INCLUDE[pn_Windows_Live_ID](../includes/pn-windows-live-id.md)] you are signed in as is the same one with access to the Azure AD tenant you want to use to register your application.</span></span>  
+  
+3. <span data-ttu-id="dc1d7-131">Click **New Project** and select **.NET Framework 4.6.1** and the **ASP.NET Web Application** template.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-131">Click **New Project** and select **.NET Framework 4.6.1** and the **ASP.NET Web Application** template.</span></span>  
+  
+    <span data-ttu-id="dc1d7-132">Click **OK**, and in the New ASP.NET project dialog select **MVC**.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-132">Click **OK**, and in the New ASP.NET project dialog select **MVC**.</span></span>  
+  
+4. <span data-ttu-id="dc1d7-133">Click the **Change Authentication** button, and in the dialog select **Work And School Accounts**.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-133">Click the **Change Authentication** button, and in the dialog select **Work And School Accounts**.</span></span>  
+  
+5. <span data-ttu-id="dc1d7-134">In the drop-down, select **Cloud – Multiple Organizations**.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-134">In the drop-down, select **Cloud – Multiple Organizations**.</span></span>  
+  
+   <span data-ttu-id="dc1d7-135">![ASP.NET  MVC Change Authentication Dialog](media/mvc-change-authentication-dialog.png "ASP.NET  MVC Change Authentication Dialog")</span><span class="sxs-lookup"><span data-stu-id="dc1d7-135">![ASP.NET  MVC Change Authentication Dialog](media/mvc-change-authentication-dialog.png "ASP.NET  MVC Change Authentication Dialog")</span></span>  
+  
+6. <span data-ttu-id="dc1d7-136">Click **OK** and complete initializing the project.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-136">Click **OK** and complete initializing the project.</span></span>  
+  
+   > [!NOTE]
+   >  <span data-ttu-id="dc1d7-137">Creating a [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)] project this way will register the application with your Azure AD tenant and add the following keys to the Web.Config appSettings:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-137">Creating a [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)] project this way will register the application with your Azure AD tenant and add the following keys to the Web.Config appSettings:</span></span>  
+  
+   ```xml  
+   <add key="ida:ClientId" value="baee6b74-3c39-4c04-bfa5-4414f3dd1c26" />  
+   <add key="ida:AADInstance" value="https://login.microsoftonline.com/" />  
+   <add key="ida:ClientSecret" value="HyPjzuRCbIl/7VUJ2+vG/+Gia6t1+5y4dvtKAcyztL4=" />  
+  
+   ```  
+  
+<a name="bkmk_RegisterAppOnAAD"></a>
+
+## <a name="register-your-application-on-azure-ad"></a><span data-ttu-id="dc1d7-138">Register your application on Azure AD</span><span class="sxs-lookup"><span data-stu-id="dc1d7-138">Register your application on Azure AD</span></span>
+ 
+ <span data-ttu-id="dc1d7-139">If you have followed the steps in [Create an MVC web application](#bkmk_createMVCWebApp), you should find that the web application project you created in [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)] is already registered in your Azure AD applications.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-139">If you have followed the steps in [Create an MVC web application](#bkmk_createMVCWebApp), you should find that the web application project you created in [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)] is already registered in your Azure AD applications.</span></span> <span data-ttu-id="dc1d7-140">But there is one more step that you must perform within the Azure AD portal.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-140">But there is one more step that you must perform within the Azure AD portal.</span></span>  
+  
+1. <span data-ttu-id="dc1d7-141">Go to [https://portal.azure.com](https://portal.azure.com) and select **Azure Active Directory**.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-141">Go to [https://portal.azure.com](https://portal.azure.com) and select **Azure Active Directory**.</span></span>  
+  
+2. <span data-ttu-id="dc1d7-142">Click **App registrations** and look for the application you created using [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)].</span><span class="sxs-lookup"><span data-stu-id="dc1d7-142">Click **App registrations** and look for the application you created using [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)].</span></span> <span data-ttu-id="dc1d7-143">In the **General** area, verify the properties:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-143">In the **General** area, verify the properties:</span></span>  
+  
+   <span data-ttu-id="dc1d7-144">![Application registration data in Azure Active Directory](media/app-registration-data.png "Application registration data in Azure Active Directory")</span><span class="sxs-lookup"><span data-stu-id="dc1d7-144">![Application registration data in Azure Active Directory](media/app-registration-data.png "Application registration data in Azure Active Directory")</span></span>  
+  
+3. <span data-ttu-id="dc1d7-145">Verify that the **Application ID** property matches the `ClientId` value added in your Web.Config appSettings.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-145">Verify that the **Application ID** property matches the `ClientId` value added in your Web.Config appSettings.</span></span>  
+  
+4. <span data-ttu-id="dc1d7-146">The **Home page URL** value should match SSL URL property in your [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)] project and should direct to a localhost URL, i.e. https://localhost:44392/.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-146">The **Home page URL** value should match SSL URL property in your [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)] project and should direct to a localhost URL, i.e. https://localhost:44392/.</span></span>  
+  
+   > [!NOTE]
+   >  <span data-ttu-id="dc1d7-147">You will need to change this later when you actually publish your application.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-147">You will need to change this later when you actually publish your application.</span></span> <span data-ttu-id="dc1d7-148">But you need to have this set to the correct localhost value for debugging.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-148">But you need to have this set to the correct localhost value for debugging.</span></span>
+   >
+
+  
+9. <span data-ttu-id="dc1d7-149">In the **API Access** area, confirm that a **Key** value has been added.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-149">In the **API Access** area, confirm that a **Key** value has been added.</span></span> <span data-ttu-id="dc1d7-150">The **Key** value is not visible in the Azure portal after the application has been created, but this value was added to your Web.Config appSettings as the `ClientSecret`.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-150">The **Key** value is not visible in the Azure portal after the application has been created, but this value was added to your Web.Config appSettings as the `ClientSecret`.</span></span>  
+
+> [!NOTE]
+> <span data-ttu-id="dc1d7-151">When registering this application you do not need to grant your application rights to access Dynamics 365 for Customer Engagement (online) data as you usually do when creating a client application.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-151">When registering this application you do not need to grant your application rights to access Dynamics 365 for Customer Engagement (online) data as you usually do when creating a client application.</span></span> <span data-ttu-id="dc1d7-152">This application is bound to a application user in the system.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-152">This application is bound to a application user in the system.</span></span>
+  
+<a name="bkmk_CreateApplicationUser"></a>
+
+## <a name="create-an-application-user"></a><span data-ttu-id="dc1d7-153">Tạo người dùng ứng dụng</span><span class="sxs-lookup"><span data-stu-id="dc1d7-153">Create an application user</span></span>
+
+ <span data-ttu-id="dc1d7-154">Using steps in [Manually create a Dynamics 365 for Customer Engagement application user](use-multi-tenant-server-server-authentication.md#bkmk_ManuallyCreateUser), create an application user with the **Application Id** value from your application registration which is also the same as the `ClientId` value in the Web.Config.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-154">Using steps in [Manually create a Dynamics 365 for Customer Engagement application user](use-multi-tenant-server-server-authentication.md#bkmk_ManuallyCreateUser), create an application user with the **Application Id** value from your application registration which is also the same as the `ClientId` value in the Web.Config.</span></span>  
+  
+<a name="bkmk_AddAssemblies"></a>
+
+## <a name="add-assemblies"></a><span data-ttu-id="dc1d7-155">Add Assemblies</span><span class="sxs-lookup"><span data-stu-id="dc1d7-155">Add Assemblies</span></span>  
+
+ <span data-ttu-id="dc1d7-156">Add the following [!INCLUDE[tn_nuget](../includes/tn-nuget.md)] packages to your project</span><span class="sxs-lookup"><span data-stu-id="dc1d7-156">Add the following [!INCLUDE[tn_nuget](../includes/tn-nuget.md)] packages to your project</span></span>  
+  
+|<span data-ttu-id="dc1d7-157">Package</span><span class="sxs-lookup"><span data-stu-id="dc1d7-157">Package</span></span>|<span data-ttu-id="dc1d7-158">Phiên bản</span><span class="sxs-lookup"><span data-stu-id="dc1d7-158">Version</span></span>|  
+|-------------|-------------|  
+|<span data-ttu-id="dc1d7-159">Microsoft.CrmSdk.CoreAssemblies</span><span class="sxs-lookup"><span data-stu-id="dc1d7-159">Microsoft.CrmSdk.CoreAssemblies</span></span>|<span data-ttu-id="dc1d7-160">Phiên bản mới nhất</span><span class="sxs-lookup"><span data-stu-id="dc1d7-160">Latest version</span></span>|  
+|<span data-ttu-id="dc1d7-161">Microsoft.IdentityModel.Clients.ActiveDirectory</span><span class="sxs-lookup"><span data-stu-id="dc1d7-161">Microsoft.IdentityModel.Clients.ActiveDirectory</span></span>|<span data-ttu-id="dc1d7-162">2.22.302111727</span><span class="sxs-lookup"><span data-stu-id="dc1d7-162">2.22.302111727</span></span>|  
+|<span data-ttu-id="dc1d7-163">Microsoft.IdentityModel.Tokens</span><span class="sxs-lookup"><span data-stu-id="dc1d7-163">Microsoft.IdentityModel.Tokens</span></span>|<span data-ttu-id="dc1d7-164">5.0.0</span><span class="sxs-lookup"><span data-stu-id="dc1d7-164">5.0.0</span></span>|  
+|<span data-ttu-id="dc1d7-165">Microsoft.Azure.ActiveDirectory.GraphClient</span><span class="sxs-lookup"><span data-stu-id="dc1d7-165">Microsoft.Azure.ActiveDirectory.GraphClient</span></span>|<span data-ttu-id="dc1d7-166">2.1.0</span><span class="sxs-lookup"><span data-stu-id="dc1d7-166">2.1.0</span></span>|  
+  
+> [!NOTE]
+>  <span data-ttu-id="dc1d7-167">Do not update the `Microsoft.IdentityModel.Clients.ActiveDirectory` assemblies to the latest version.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-167">Do not update the `Microsoft.IdentityModel.Clients.ActiveDirectory` assemblies to the latest version.</span></span> <span data-ttu-id="dc1d7-168">Version 3.x of these assemblies changed an interface that the `Microsoft.CrmSdk.CoreAssemblies` depends on.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-168">Version 3.x of these assemblies changed an interface that the `Microsoft.CrmSdk.CoreAssemblies` depends on.</span></span>  
+  
+ <span data-ttu-id="dc1d7-169">For information about managing [!INCLUDE[tn_nuget](../includes/tn-nuget.md)] packages, see [NuGet Documentation: Managing NuGet Packages Using the UI](https://docs.nuget.org/ndocs/tools/package-manager-ui)</span><span class="sxs-lookup"><span data-stu-id="dc1d7-169">For information about managing [!INCLUDE[tn_nuget](../includes/tn-nuget.md)] packages, see [NuGet Documentation: Managing NuGet Packages Using the UI](https://docs.nuget.org/ndocs/tools/package-manager-ui)</span></span>  
+  
+<a name="bkmk_ApplyCodeChanges"></a>
+
+## <a name="apply-code-changes-to-the-mvc-template"></a><span data-ttu-id="dc1d7-170">Apply code changes to the MVC template</span><span class="sxs-lookup"><span data-stu-id="dc1d7-170">Apply code changes to the MVC template</span></span>
+
+ <span data-ttu-id="dc1d7-171">The following code changes will provide basic functionality to use the [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)]`WhoAmI` message and verify that the application user account identity is being used by the application.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-171">The following code changes will provide basic functionality to use the [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)]`WhoAmI` message and verify that the application user account identity is being used by the application.</span></span>  
+  
+<a name="bkmk_WebConfig"></a>
+
+### <a name="webconfig"></a><span data-ttu-id="dc1d7-172">Web.config</span><span class="sxs-lookup"><span data-stu-id="dc1d7-172">Web.config</span></span> 
+
+ <span data-ttu-id="dc1d7-173">Add the following keys to the appSettings.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-173">Add the following keys to the appSettings.</span></span>  
+  
+```xml  
+<add key="ida:OrganizationHostName" value="https://{0}.crm.dynamics.com" />   
+```  
+  
+ <span data-ttu-id="dc1d7-174">The ida:OrganizationHostName string will have the subscriber’s [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] online organization name added at the placeholder so that the correct service will be accessed.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-174">The ida:OrganizationHostName string will have the subscriber’s [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] online organization name added at the placeholder so that the correct service will be accessed.</span></span>  
+  
+```xml  
+<add key="owin:appStartup" value="<your app namespace>.Startup" />  
+```  
+  
+ <span data-ttu-id="dc1d7-175">The owin:appStartup string ensures that the OWIN middleware uses the `Startup` class in this project.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-175">The owin:appStartup string ensures that the OWIN middleware uses the `Startup` class in this project.</span></span> <span data-ttu-id="dc1d7-176">Otherwise you will get the following error:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-176">Otherwise you will get the following error:</span></span>  
+  
+```ms-dos
+- No assembly found containing an OwinStartupAttribute.  
+- No assembly found containing a Startup or [AssemblyName].Startup class.  
+```  
+  
+ <span data-ttu-id="dc1d7-177">More information: [ASP.NET: OWIN Startup Class Detection](https://www.asp.net/aspnet/overview/owin-and-katana/owin-startup-class-detection)</span><span class="sxs-lookup"><span data-stu-id="dc1d7-177">More information: [ASP.NET: OWIN Startup Class Detection](https://www.asp.net/aspnet/overview/owin-and-katana/owin-startup-class-detection)</span></span>  
+  
+<a name="bkmk_HomeController"></a>
+
+### <a name="controllershomecontrollercs"></a><span data-ttu-id="dc1d7-178">Controllers/HomeController.cs</span><span class="sxs-lookup"><span data-stu-id="dc1d7-178">Controllers/HomeController.cs</span></span>
+
+ <span data-ttu-id="dc1d7-179">Add the `AllowAnonymous` decorator to the `Index` action.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-179">Add the `AllowAnonymous` decorator to the `Index` action.</span></span> <span data-ttu-id="dc1d7-180">This allows access to the default page without authentication.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-180">This allows access to the default page without authentication.</span></span>  
+  
+```csharp  
+using System.Web.Mvc;  
+  
+namespace SampleApp.Controllers  
+{  
+    [Authorize]  
+    public class HomeController : Controller  
+    {  
+        [AllowAnonymous]  
+        public ActionResult Index()  
+        {  
+            return View();  
+        }  
+  
+        public ActionResult About()  
+        {  
+            ViewBag.Message = "Your application description page.";  
+  
+            return View();  
+        }  
+  
+        public ActionResult Contact()  
+        {  
+            ViewBag.Message = "Your contact page.";  
+  
+            return View();  
+        }  
+    }  
+}  
+  
+```  
+  
+> [!NOTE]
+>  <span data-ttu-id="dc1d7-181">In your web application or service, it is not expected that you will allow anonymous access.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-181">In your web application or service, it is not expected that you will allow anonymous access.</span></span> <span data-ttu-id="dc1d7-182">Anonymous access is used here for simplicity.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-182">Anonymous access is used here for simplicity.</span></span> <span data-ttu-id="dc1d7-183">Controlling access to your application is out of scope for this walkthrough.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-183">Controlling access to your application is out of scope for this walkthrough.</span></span>  
+  
+<a name="bkmk_ViewsSharedLayout"></a>
+
+### <a name="viewssharedlayoutcshtml"></a><span data-ttu-id="dc1d7-184">Views/Shared/_Layout.cshtml</span><span class="sxs-lookup"><span data-stu-id="dc1d7-184">Views/Shared/_Layout.cshtml</span></span>  
+
+ <span data-ttu-id="dc1d7-185">In order to display the command link **WhoAmI** for authenticated users, you need to edit this file.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-185">In order to display the command link **WhoAmI** for authenticated users, you need to edit this file.</span></span>  
+  
+ <span data-ttu-id="dc1d7-186">Locate the `div` element with the class `navbar-collapse collapse` and edit it to include the code below:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-186">Locate the `div` element with the class `navbar-collapse collapse` and edit it to include the code below:</span></span>  
+  
+```html  
+<div class="navbar-collapse collapse">  
+    <ul class="nav navbar-nav">  
+     <li>@Html.ActionLink("Home", "Index", "Home")</li>  
+     <li>@Html.ActionLink("About", "About", "Home")</li>  
+     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>  
+     @if (Request.IsAuthenticated)  
+     {  
+         <li>@Html.ActionLink("WhoAmI", "Index", "CrmSdk")</li>  
+     }  
+    </ul>  
+  
+    @Html.Partial("_LoginPartial")  
+   </div>  
+  
+```  
+  
+<a name="bkmk_AppStartStartupAuth"></a>
+
+### <a name="appstartstartupauthcs"></a><span data-ttu-id="dc1d7-187">App_Start/Startup.Auth.cs</span><span class="sxs-lookup"><span data-stu-id="dc1d7-187">App_Start/Startup.Auth.cs</span></span>  
+
+ <span data-ttu-id="dc1d7-188">The following changes will invoke the consent framework when a new tenant logs into the application:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-188">The following changes will invoke the consent framework when a new tenant logs into the application:</span></span>  
+  
+```csharp  
+public partial class Startup  
+ {  
+  private static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];  
+  private string appKey = ConfigurationManager.AppSettings["ida:ClientSecret"];  
+  //Not used     
+  //private string graphResourceID = "https://graph.windows.net";      
+  private static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];  
+  private string authority = aadInstance + "common";  
+  private ApplicationDbContext db = new ApplicationDbContext();  
+  
+  //Added  
+  private string OrganizationHostName = ConfigurationManager.AppSettings["ida:OrganizationHostName"];  
+  
+  public void ConfigureAuth(IAppBuilder app)  
+  {  
+  
+   app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);  
+  
+   app.UseCookieAuthentication(new CookieAuthenticationOptions { });  
+  
+   app.UseOpenIdConnectAuthentication(  
+       new OpenIdConnectAuthenticationOptions  
+       {  
+        ClientId = clientId,  
+        Authority = authority,  
+        TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters  
+        {  
+         /*  
+         instead of using the default validation   
+         (validating against a single issuer value, as we do in line of business apps),   
+         we inject our own multitenant validation logic  
+         */  
+         ValidateIssuer = false,  
+        },  
+        Notifications = new OpenIdConnectAuthenticationNotifications()  
+        {  
+         SecurityTokenValidated = (context) =>  
+                  {  
+                   return Task.FromResult(0);  
+                  },  
+         AuthorizationCodeReceived = (context) =>  
+                  {  
+                   var code = context.Code;  
+  
+                   ClientCredential credential = new ClientCredential(clientId, appKey);  
+                   string tenantID = context  
+                    .AuthenticationTicket  
+                    .Identity  
+                    .FindFirst("http://schemas.microsoft.com/identity/claims/tenantid")  
+                    .Value;  
+  
+                   /* Not used  
+                  string signedInUserID = context  
+                     .AuthenticationTicket  
+                     .Identity  
+                     .FindFirst(ClaimTypes.NameIdentifier)  
+                     .Value;    
+                     */  
+  
+                   //Added  
+                   var resource = string.Format(OrganizationHostName, '*');  
+                   //Added  
+                   Uri returnUri = new Uri(  
+                    HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)  
+                    );  
+  
+                   /* Changed below  
+                    AuthenticationContext authContext =   
+                    new AuthenticationContext(  
+                     aadInstance + tenantID,   
+                     new ADALTokenCache(signedInUserID)  
+                     );  
+                    */  
+                   //Changed version  
+                   AuthenticationContext authContext =  
+                   new AuthenticationContext(aadInstance + tenantID);  
+  
+                   /* Changed below  
+                   AuthenticationResult result = authContext.AcquireTokenByAuthorizationCode(  
+                       code,   
+                       new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)),   
+                       credential,   
+                       graphResourceID);  
+                   */  
+                   //Changed version  
+                   AuthenticationResult result = authContext.AcquireTokenByAuthorizationCode(  
+                       code,  
+                       new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)),  
+                       credential,  
+                       resource);  
+  
+                   return Task.FromResult(0);  
+                  },  
+         AuthenticationFailed = (context) =>  
+                  {  
+                   context.OwinContext.Response.Redirect("/Home/Error");  
+                   context.HandleResponse(); // Suppress the exception  
+                   return Task.FromResult(0);  
+                  }  
+        }  
+       });  
+  
+  }  
+ }  
+  
+```  
+  
+<a name="bkmk_AddControllersCrmSdkController"></a>
+
+### <a name="add-controllerscrmsdkcontroller"></a><span data-ttu-id="dc1d7-189">Add Controllers/CrmSdkController</span><span class="sxs-lookup"><span data-stu-id="dc1d7-189">Add Controllers/CrmSdkController</span></span>  
+
+ <span data-ttu-id="dc1d7-190">Add the following CrmSdkController.cs to the Controllers folder.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-190">Add the following CrmSdkController.cs to the Controllers folder.</span></span> <span data-ttu-id="dc1d7-191">This code will execute the `WhoAmI` message</span><span class="sxs-lookup"><span data-stu-id="dc1d7-191">This code will execute the `WhoAmI` message</span></span>  
+  
+1.  <span data-ttu-id="dc1d7-192">Right click the Controllers folder and select **Add** > **Controller…**</span><span class="sxs-lookup"><span data-stu-id="dc1d7-192">Right click the Controllers folder and select **Add** > **Controller…**</span></span>  
+  
+2.  <span data-ttu-id="dc1d7-193">In the **Add Scaffold** dialog, select **MVC5 Controller – Empty**</span><span class="sxs-lookup"><span data-stu-id="dc1d7-193">In the **Add Scaffold** dialog, select **MVC5 Controller – Empty**</span></span>  
+  
+3.  <span data-ttu-id="dc1d7-194">Click **Add**</span><span class="sxs-lookup"><span data-stu-id="dc1d7-194">Click **Add**</span></span>  
+  
+4.  <span data-ttu-id="dc1d7-195">Paste the following code substituting `<Your app namespace>` with the namespace of your app.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-195">Paste the following code substituting `<Your app namespace>` with the namespace of your app.</span></span>  
+  
+```csharp  
+using Microsoft.IdentityModel.Clients.ActiveDirectory;   
+using Microsoft.Xrm.Sdk;   
+using Microsoft.Xrm.Sdk.WebServiceClient;   
+using System; using System.Configuration;   
+using System.Linq;   
+using System.Security.Claims;   
+using System.Web.Mvc;  
+  
+namespace <Your app namespace>  
+{  
+ [Authorize]  
+ public class CrmSdkController : Controller  
+    {  
+  
+  private string clientId =   
+   ConfigurationManager.AppSettings["ida:ClientId"];  
+  private string authority =   
+   ConfigurationManager.AppSettings["ida:AADInstance"] + "common";  
+  private string aadInstance =   
+   ConfigurationManager.AppSettings["ida:AADInstance"];  
+  private string OrganizationHostName =   
+   ConfigurationManager.AppSettings["ida:OrganizationHostName"];  
+  private string appKey =   
+   ConfigurationManager.AppSettings["ida:ClientSecret"];  
+  
+  // GET: CrmSdk  
+  public ActionResult Index()  
+  {  
+   string tenantID = ClaimsPrincipal  
+    .Current  
+    .FindFirst("http://schemas.microsoft.com/identity/claims/tenantid")  
+    .Value;  
+   // Clean organization name from user logged  
+   string organizationName = User.Identity.Name.Substring(  
+    User.Identity.Name.IndexOf('@') + 1,   
+    User.Identity.Name.IndexOf('.') - (User.Identity.Name.IndexOf('@') + 1)  
+    );  
+   //string crmResourceId = "https://[orgname].crm.microsoftonline.com";  
+   var resource = string.Format(OrganizationHostName, organizationName);  
+   // Request a token using application credentials  
+   ClientCredential clientcred = new ClientCredential(clientId, appKey);  
+   AuthenticationContext authenticationContext =   
+    new AuthenticationContext(aadInstance + tenantID);  
+   AuthenticationResult authenticationResult =   
+    authenticationContext.AcquireToken(resource, clientcred);  
+   var requestedToken = authenticationResult.AccessToken;  
+   // Invoke SDK using using the requested token  
+   using (var sdkService =  
+    new OrganizationWebProxyClient(  
+     GetServiceUrl(organizationName), false)  
+     )  
+   {  
+    sdkService.HeaderToken = requestedToken;  
+    OrganizationRequest request = new OrganizationRequest() {  
+     RequestName = "WhoAmI"  
+    };  
+    OrganizationResponse response = sdkService.Execute(request);  
+    return View((object)string.Join(",", response.Results.ToList()));  
+   }  
+  }  
+  
+  private Uri GetServiceUrl(string organizationName)  
+  {  
+   var organizationUrl = new Uri(  
+    string.Format(OrganizationHostName, organizationName)  
+    );  
+   return new Uri(  
+    organizationUrl +   
+    @"/xrmservices/2011/organization.svc/web?SdkClientVersion=8.2"  
+);  
+  }  
+ }  
+}  
+  
+```  
+  
+<a name="bkmk_ViewsCrmSdk"></a>
+
+### <a name="viewscrmsdk"></a><span data-ttu-id="dc1d7-196">Views/CrmSdk</span><span class="sxs-lookup"><span data-stu-id="dc1d7-196">Views/CrmSdk</span></span>
+
+ <span data-ttu-id="dc1d7-197">Add a new view named Index.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-197">Add a new view named Index.</span></span>  
+  
+1. <span data-ttu-id="dc1d7-198">Right click the CrmSdk folder and select **Add** > **View…**</span><span class="sxs-lookup"><span data-stu-id="dc1d7-198">Right click the CrmSdk folder and select **Add** > **View…**</span></span>  
+  
+2. <span data-ttu-id="dc1d7-199">In the **Add View** dialog, set the following values:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-199">In the **Add View** dialog, set the following values:</span></span>  
+  
+   <span data-ttu-id="dc1d7-200">![MVC Add View Dialog](media/mvc-add-view-dialog.PNG "MVC Add View Dialog")</span><span class="sxs-lookup"><span data-stu-id="dc1d7-200">![MVC Add View Dialog](media/mvc-add-view-dialog.PNG "MVC Add View Dialog")</span></span>  
+  
+3. <span data-ttu-id="dc1d7-201">Click **Add**</span><span class="sxs-lookup"><span data-stu-id="dc1d7-201">Click **Add**</span></span>  
+  
+4. <span data-ttu-id="dc1d7-202">Replace the generated code with the following:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-202">Replace the generated code with the following:</span></span>  
+  
+   ```html  
+   @model string  
+   @{  
+    ViewBag.Title = "SDK Connect";  
+   }  
+  
+   <h2>@ViewBag.Title.</h2>  
+  
+   <p>Connected and executed sdk command WhoAmI.</p>  
+  
+   <p>Value: @Model</p>  
+  
+   ```  
+  
+<a name="bkmk_DebugApp"></a>
+
+## <a name="debug-the-app"></a><span data-ttu-id="dc1d7-203">Debug the app</span><span class="sxs-lookup"><span data-stu-id="dc1d7-203">Debug the app</span></span>
+
+ <span data-ttu-id="dc1d7-204">When you press F5 to debug the application you may get error that the certificate accessing localhost using SSL is not trusted.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-204">When you press F5 to debug the application you may get error that the certificate accessing localhost using SSL is not trusted.</span></span> <span data-ttu-id="dc1d7-205">The following are some links to resolve this issue with [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)]and IIS Express:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-205">The following are some links to resolve this issue with [!INCLUDE[pn_Visual_Studio_short](../includes/pn-visual-studio-short.md)]and IIS Express:</span></span>  
+  
+-   [http://stackoverflow.com/questions/20036984/how-do-i-fix-a-missing-iis-express-ssl-certificate](http://stackoverflow.com/questions/20036984/how-do-i-fix-a-missing-iis-express-ssl-certificate)  
+  
+-   [https://blogs.msdn.microsoft.com/robert_mcmurray/2013/11/15/how-to-trust-the-iis-express-self-signed-certificate/](https://blogs.msdn.microsoft.com/robert_mcmurray/2013/11/15/how-to-trust-the-iis-express-self-signed-certificate/)  
+  
+> [!NOTE]
+>  <span data-ttu-id="dc1d7-206">For this step, you can simply use the [!INCLUDE[pn_Windows_Live_ID](../includes/pn-windows-live-id.md)] associated with your Azure AD tenant and the [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] tenant that it is associated with.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-206">For this step, you can simply use the [!INCLUDE[pn_Windows_Live_ID](../includes/pn-windows-live-id.md)] associated with your Azure AD tenant and the [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] tenant that it is associated with.</span></span> <span data-ttu-id="dc1d7-207">This isn’t actually demonstrating a multi-tenant scenario.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-207">This isn’t actually demonstrating a multi-tenant scenario.</span></span> <span data-ttu-id="dc1d7-208">We will do that in the next step.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-208">We will do that in the next step.</span></span> <span data-ttu-id="dc1d7-209">This step is just to verify that the code works before introducing the additional complexity of testing the actual multi-tenant functionality.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-209">This step is just to verify that the code works before introducing the additional complexity of testing the actual multi-tenant functionality.</span></span>  
+  
+ <span data-ttu-id="dc1d7-210">Refer to the steps described in [Goal of this walkthrough](#bkmk_goal) to test the application.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-210">Refer to the steps described in [Goal of this walkthrough](#bkmk_goal) to test the application.</span></span>  
+  
+ <span data-ttu-id="dc1d7-211">At this point you can verify that the application user account was used.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-211">At this point you can verify that the application user account was used.</span></span> <span data-ttu-id="dc1d7-212">An easy way to check this is by using the [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] Web API.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-212">An easy way to check this is by using the [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] Web API.</span></span> <span data-ttu-id="dc1d7-213">Type in the following URL into a separate tab or window, substituting the `UserId` value from the application.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-213">Type in the following URL into a separate tab or window, substituting the `UserId` value from the application.</span></span>  
+  
+```
+[Organization URI]/api/data/v9.0/systemusers(<UserId value>)?$select=fullname  
+```  
+  
+ <span data-ttu-id="dc1d7-214">The  JSON response should look like the following.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-214">The  JSON response should look like the following.</span></span> <span data-ttu-id="dc1d7-215">Notice that the fullname value will be to the application user you created in the [Create an application user](#bkmk_CreateApplicationUser) step, rather than the [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] user you used to sign into the application.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-215">Notice that the fullname value will be to the application user you created in the [Create an application user](#bkmk_CreateApplicationUser) step, rather than the [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] user you used to sign into the application.</span></span>  
+  
+```json  
+{  
+    "@odata.context": "[Organization Uri]/api/data/v9.0/$metadata#systemusers(fullname)/$entity",  
+    "@odata.etag": "W/\"603849\"",  
+    "fullname": "S2S User",  
+    "systemuserid": "31914b34-be8d-e611-80d8-00155d892ddc",  
+    "ownerid": "31914b34-be8d-e611-80d8-00155d892ddc"  
+}  
+  
+```  
+  
+<a name="bkmk_ConfigureTestSubscriber"></a>
+
+## <a name="configure-test-subscriber"></a><span data-ttu-id="dc1d7-216">Configure test subscriber</span><span class="sxs-lookup"><span data-stu-id="dc1d7-216">Configure test subscriber</span></span>
+
+ <span data-ttu-id="dc1d7-217">Now that you have verified that the application works, it time to test connectivity to a different [!INCLUDE[pn_crm_online_shortest](../includes/pn-crm-online-shortest.md)] tenant.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-217">Now that you have verified that the application works, it time to test connectivity to a different [!INCLUDE[pn_crm_online_shortest](../includes/pn-crm-online-shortest.md)] tenant.</span></span>  <span data-ttu-id="dc1d7-218">Using a different [!INCLUDE[pn_crm_online_shortest](../includes/pn-crm-online-shortest.md)] organization you will need to perform the following steps.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-218">Using a different [!INCLUDE[pn_crm_online_shortest](../includes/pn-crm-online-shortest.md)] organization you will need to perform the following steps.</span></span>  
+  
+<a name="bkmk_GiveConsentFromSubscriber"></a>
+
+### <a name="give-consent-from-the-subscribing-tenant"></a><span data-ttu-id="dc1d7-219">Give consent from the subscribing tenant</span><span class="sxs-lookup"><span data-stu-id="dc1d7-219">Give consent from the subscribing tenant</span></span>
+
+ <span data-ttu-id="dc1d7-220">To give consent, perform the following steps while logged in as the Azure AD admin:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-220">To give consent, perform the following steps while logged in as the Azure AD admin:</span></span>  
+  
+1. <span data-ttu-id="dc1d7-221">While you are debugging your application, open a separate InPrivate or incognito window.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-221">While you are debugging your application, open a separate InPrivate or incognito window.</span></span>  
+  
+2. <span data-ttu-id="dc1d7-222">In the address field of the window type the URL for your app, i.e. `https://localhost:44392/`</span><span class="sxs-lookup"><span data-stu-id="dc1d7-222">In the address field of the window type the URL for your app, i.e. `https://localhost:44392/`</span></span>  
+  
+3. <span data-ttu-id="dc1d7-223">Click the **Sign in** button  and you will be prompted to grant consent.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-223">Click the **Sign in** button  and you will be prompted to grant consent.</span></span>  
+  
+   <span data-ttu-id="dc1d7-224">![Azure Active Directory consent form](media/mvc-s2s-walkthrough-app-grant-consent.PNG "Azure Active Directory consent form")</span><span class="sxs-lookup"><span data-stu-id="dc1d7-224">![Azure Active Directory consent form](media/mvc-s2s-walkthrough-app-grant-consent.PNG "Azure Active Directory consent form")</span></span>  
+  
+   <span data-ttu-id="dc1d7-225">After you grant consent you will return to the app, but you won’t be able to use it yet.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-225">After you grant consent you will return to the app, but you won’t be able to use it yet.</span></span> <span data-ttu-id="dc1d7-226">If you click **WhoAmI** at this point you can expect the following exception:</span><span class="sxs-lookup"><span data-stu-id="dc1d7-226">If you click **WhoAmI** at this point you can expect the following exception:</span></span>  
+  
+```
+System.ServiceModel.Security.MessageSecurityException  
+HResult=-2146233087  
+  Message=The HTTP request is unauthorized with client authentication scheme 'Anonymous'. The authentication header received from the server was 'Bearer authorization_uri=https://login.microsoftonline.com/4baaeaaf-2771-4583-99eb-7c7e39aa1e74/oauth2/authorize, resource_id=https://<org name>.crm.dynamics.com/'.  
+InnerException.Message =The remote server returned an error: (401) Unauthorized.  
+```  
+  
+ <span data-ttu-id="dc1d7-227">By granting consent, the application from your Azure AD tenant will be added to the applications in the subscriber’s active directory tenant.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-227">By granting consent, the application from your Azure AD tenant will be added to the applications in the subscriber’s active directory tenant.</span></span>  
+  
+<a name="bkmk_CreateSubscriberSecurityRole"></a>
+
+### <a name="create-a-custom-security-role-in-the-subscriber-tenant"></a><span data-ttu-id="dc1d7-228">Create a custom security role in the subscriber tenant</span><span class="sxs-lookup"><span data-stu-id="dc1d7-228">Create a custom security role in the subscriber tenant</span></span>
+
+ <span data-ttu-id="dc1d7-229">The application user  you will need to create must be associated with a custom security role which defines their privileges.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-229">The application user  you will need to create must be associated with a custom security role which defines their privileges.</span></span> <span data-ttu-id="dc1d7-230">For this manual testing step, you should first manually create a custom security role.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-230">For this manual testing step, you should first manually create a custom security role.</span></span> [!INCLUDE[proc_more_information](../includes/proc-more-information.md)] <span data-ttu-id="dc1d7-231">[Tạo hoặc chỉnh sửa vai trò bảo mật](../admin/create-edit-security-role.md)</span><span class="sxs-lookup"><span data-stu-id="dc1d7-231">[Create or edit a security role](../admin/create-edit-security-role.md)</span></span>  
+  
+> [!NOTE]
+>  <span data-ttu-id="dc1d7-232">The application user cannot be associated with one of the default [!INCLUDE[pn_crm_2016_shortest](../includes/pn-crm-2016-shortest.md)] security roles.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-232">The application user cannot be associated with one of the default [!INCLUDE[pn_crm_2016_shortest](../includes/pn-crm-2016-shortest.md)] security roles.</span></span> <span data-ttu-id="dc1d7-233">You must create a custom security role to associate with the application user.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-233">You must create a custom security role to associate with the application user.</span></span>  
+  
+<a name="bkmk_CreateSubscriberUser"></a>
+
+### <a name="create-the-subscriber-application-user"></a><span data-ttu-id="dc1d7-234">Create the subscriber application user</span><span class="sxs-lookup"><span data-stu-id="dc1d7-234">Create the subscriber application user</span></span>
+
+ <span data-ttu-id="dc1d7-235">For the purposes of this walkthrough, we will manually create the application user to verify connectivity from a different tenant.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-235">For the purposes of this walkthrough, we will manually create the application user to verify connectivity from a different tenant.</span></span> <span data-ttu-id="dc1d7-236">When you deploy to actual subscribers, you will want to automate this.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-236">When you deploy to actual subscribers, you will want to automate this.</span></span> [!INCLUDE[proc_more_information](../includes/proc-more-information.md)] <span data-ttu-id="dc1d7-237">[Prepare a method to deploy the application user](use-multi-tenant-server-server-authentication.md#bkmk_PrepareMethodToDeployAppUser)</span><span class="sxs-lookup"><span data-stu-id="dc1d7-237">[Prepare a method to deploy the application user](use-multi-tenant-server-server-authentication.md#bkmk_PrepareMethodToDeployAppUser)</span></span>  
+  
+ <span data-ttu-id="dc1d7-238">You create the application user  manually using the same values you used for your development organization in [Create an application user](#bkmk_CreateApplicationUser).</span><span class="sxs-lookup"><span data-stu-id="dc1d7-238">You create the application user  manually using the same values you used for your development organization in [Create an application user](#bkmk_CreateApplicationUser).</span></span> <span data-ttu-id="dc1d7-239">The exception is that you must have completed the step to grant consent first.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-239">The exception is that you must have completed the step to grant consent first.</span></span> <span data-ttu-id="dc1d7-240">When you save the user, the **Application ID URI** and **Azure AD Object ID** values will be set.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-240">When you save the user, the **Application ID URI** and **Azure AD Object ID** values will be set.</span></span> <span data-ttu-id="dc1d7-241">You will not be able to save the user if you haven’t granted consent first.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-241">You will not be able to save the user if you haven’t granted consent first.</span></span>  
+  
+ <span data-ttu-id="dc1d7-242">Finally, associate the application user  with the custom security role you added in the previous step.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-242">Finally, associate the application user  with the custom security role you added in the previous step.</span></span>  
+  
+<a name="bkmk_TestSubscriber"></a>
+
+### <a name="test-the-subscriber-connection"></a><span data-ttu-id="dc1d7-243">Test the subscriber connection</span><span class="sxs-lookup"><span data-stu-id="dc1d7-243">Test the subscriber connection</span></span>
+
+ <span data-ttu-id="dc1d7-244">Repeat the steps in [Debug the app](#bkmk_DebugApp) except use the credentials for a user from the other [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] tenant.</span><span class="sxs-lookup"><span data-stu-id="dc1d7-244">Repeat the steps in [Debug the app](#bkmk_DebugApp) except use the credentials for a user from the other [!INCLUDE[pn_crm_shortest](../includes/pn-crm-shortest.md)] tenant.</span></span>  
+  
+### <a name="see-also"></a><span data-ttu-id="dc1d7-245">Xem thêm</span><span class="sxs-lookup"><span data-stu-id="dc1d7-245">See also</span></span>  
+ <span data-ttu-id="dc1d7-246">[Use Multi-Tenant Server-to-server authentication](use-multi-tenant-server-server-authentication.md) </span><span class="sxs-lookup"><span data-stu-id="dc1d7-246">[Use Multi-Tenant Server-to-server authentication](use-multi-tenant-server-server-authentication.md) </span></span>  
+ <span data-ttu-id="dc1d7-247">[Use Single-Tenant Server-to-server authentication](use-single-tenant-server-server-authentication.md) </span><span class="sxs-lookup"><span data-stu-id="dc1d7-247">[Use Single-Tenant Server-to-server authentication](use-single-tenant-server-server-authentication.md) </span></span>  
+ <span data-ttu-id="dc1d7-248">[Build web applications using Server-to-Server (S2S) authentication](build-web-applications-server-server-s2s-authentication.md) </span><span class="sxs-lookup"><span data-stu-id="dc1d7-248">[Build web applications using Server-to-Server (S2S) authentication](build-web-applications-server-server-s2s-authentication.md) </span></span>  
+ [<span data-ttu-id="dc1d7-249">Connect to Dynamics 365 for Customer Engagement</span><span class="sxs-lookup"><span data-stu-id="dc1d7-249">Connect to Dynamics 365 for Customer Engagement</span></span>](connect-customer-engagement.md)

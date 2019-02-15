@@ -1,0 +1,46 @@
+---
+title: Get started with Dynamics 365 for Customer Engagement Web API (C#) (Developer Guide for Dynamics 365 for Customer Engagement)| MicrosoftDocs
+description: Learn how to access the Dynamics 365 for Customer Engagement Web API using the Microsoft Visual C# programming language
+ms.custom: ''
+ms.date: 10/31/2017
+ms.reviewer: ''
+ms.service: crm-online
+ms.suite: ''
+ms.tgt_pltfrm: ''
+ms.topic: get-started-article
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+ms.assetid: 8105ff3d-4c8e-4f86-bbb9-e37bdb4c272e
+caps.latest.revision: 14
+author: JimDaly
+ms.author: jdaly
+manager: amyla
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: 46310c11aacb4b3e8451fd10416d8c731d4a9dbb
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "388340"
+---
+# <a name="get-started-with-dynamics-365-for-customer-engagement-web-api-c"></a><span data-ttu-id="80dab-103">Get started with Dynamics 365 for Customer Engagement Web API (C#)</span><span class="sxs-lookup"><span data-stu-id="80dab-103">Get started with Dynamics 365 for Customer Engagement Web API (C#)</span></span>
+
+[!INCLUDE[](../../includes/cc_applies_to_update_9_0_0.md)]
+
+<span data-ttu-id="80dab-104">This section shows you how to access the [!INCLUDE[pn_dynamics_crm](../../includes/pn-dynamics-crm.md)] apps Web API using the [!INCLUDE[pn_MS_Visual_C#](../../includes/pn-ms-visual-csharp.md)] programming language.</span><span class="sxs-lookup"><span data-stu-id="80dab-104">This section shows you how to access the [!INCLUDE[pn_dynamics_crm](../../includes/pn-dynamics-crm.md)] apps Web API using the [!INCLUDE[pn_MS_Visual_C#](../../includes/pn-ms-visual-csharp.md)] programming language.</span></span> <span data-ttu-id="80dab-105">The first topic, [Simple Web API quick-start sample (C#)](simple-web-api-quick-start-sample-csharp.md), provides the quickest example of how to accomplish this, as all source code is simplified and provided in one file.</span><span class="sxs-lookup"><span data-stu-id="80dab-105">The first topic, [Simple Web API quick-start sample (C#)](simple-web-api-quick-start-sample-csharp.md), provides the quickest example of how to accomplish this, as all source code is simplified and provided in one file.</span></span> <span data-ttu-id="80dab-106">The rest of this section shows you how to create and configure [!INCLUDE[pn_Visual_Studio](../../includes/pn-visual-studio.md)] projects that use the [!INCLUDE[pn_dynamics_crm](../../includes/pn-dynamics-crm.md)] apps Web API to perform common business data operations.</span><span class="sxs-lookup"><span data-stu-id="80dab-106">The rest of this section shows you how to create and configure [!INCLUDE[pn_Visual_Studio](../../includes/pn-visual-studio.md)] projects that use the [!INCLUDE[pn_dynamics_crm](../../includes/pn-dynamics-crm.md)] apps Web API to perform common business data operations.</span></span> <span data-ttu-id="80dab-107">You will be shown how to add helper libraries and references to your project to facilitate authentication and communication to your [!INCLUDE[pn_dynamics_crm](../../includes/pn-dynamics-crm.md)] apps Server.</span><span class="sxs-lookup"><span data-stu-id="80dab-107">You will be shown how to add helper libraries and references to your project to facilitate authentication and communication to your [!INCLUDE[pn_dynamics_crm](../../includes/pn-dynamics-crm.md)] apps Server.</span></span>  
+  
+ <span data-ttu-id="80dab-108">After completing this guide, you will have learned enough to explore the many other business operations that are supported by the [!INCLUDE[pn_dynamics_crm](../../includes/pn-dynamics-crm.md)] apps Web API.</span><span class="sxs-lookup"><span data-stu-id="80dab-108">After completing this guide, you will have learned enough to explore the many other business operations that are supported by the [!INCLUDE[pn_dynamics_crm](../../includes/pn-dynamics-crm.md)] apps Web API.</span></span>   <span data-ttu-id="80dab-109">You will also have a better understanding about how the [Web API Samples (C#)](web-api-samples-csharp.md) are structured.</span><span class="sxs-lookup"><span data-stu-id="80dab-109">You will also have a better understanding about how the [Web API Samples (C#)](web-api-samples-csharp.md) are structured.</span></span>  
+  
+## <a name="in-this-section"></a><span data-ttu-id="80dab-110">In this section</span><span class="sxs-lookup"><span data-stu-id="80dab-110">In this section</span></span>  
+ [<span data-ttu-id="80dab-111">Simple Web API quick-start sample (C#)</span><span class="sxs-lookup"><span data-stu-id="80dab-111">Simple Web API quick-start sample (C#)</span></span>](simple-web-api-quick-start-sample-csharp.md)  
+  
+ [<span data-ttu-id="80dab-112">Start a Web API project in Visual Studio (C#)</span><span class="sxs-lookup"><span data-stu-id="80dab-112">Start a Web API project in Visual Studio (C#)</span></span>](start-web-api-project-visual-studio-csharp.md)  
+  
+ [<span data-ttu-id="80dab-113">Use the Dynamics 365 for Customer Engagement Web API Helper Library (C#)</span><span class="sxs-lookup"><span data-stu-id="80dab-113">Use the Dynamics 365 for Customer Engagement Web API Helper Library (C#)</span></span>](use-microsoft-dynamics-365-web-api-helper-library-csharp.md)  
+  
+### <a name="see-also"></a><span data-ttu-id="80dab-114">Xem thêm</span><span class="sxs-lookup"><span data-stu-id="80dab-114">See also</span></span>  
+ <span data-ttu-id="80dab-115">[Perform operations using the Web API](perform-operations-web-api.md) </span><span class="sxs-lookup"><span data-stu-id="80dab-115">[Perform operations using the Web API](perform-operations-web-api.md) </span></span>  
+ [<span data-ttu-id="80dab-116">Web API Samples (C#)</span><span class="sxs-lookup"><span data-stu-id="80dab-116">Web API Samples (C#)</span></span>](web-api-samples-csharp.md)
