@@ -1,0 +1,115 @@
+---
+title: Help improve Unified Service Desk for Dynamics 365 for Customer Engagement apps | MicrosoftDocs
+description: Learn how you can make our app better by sending system and application information to Microsoft.
+ms.custom:
+- dyn365-USD, dyn365-admin
+ms.date: 04/24/2018
+ms.service: dynamics-365-customerservice
+ms.topic: article
+applies_to:
+- Dynamics 365 for Customer Engagement apps
+- Dynamics 365 for Customer Engagement (on-premises) apps
+- Dynamics CRM 2013
+- Dynamics CRM 2015
+- Dynamics CRM 2016
+ms.assetid: 4ca41e5e-d266-4060-8f26-dac57ca2bb29
+author: kabala123
+ms.author: kabala
+manager: shujoshi
+tags:
+- MigrationHO
+search.audienceType:
+- admin
+search.app:
+- D365CE
+- D365USD
+ms.openlocfilehash: 2712637ca099a9659f9ecc3d1dfe1a31de229b26
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "382516"
+---
+# <a name="improve-unified-service-desk"></a>Improve Unified Service Desk
+Improvement program data lets [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] send  application-specific information like product usage, health, and performance data to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)]. We use the information that we collect from the program to analyze and improve the service and product experience for our customers.
+  
+ The kinds of information that [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] sends anonymously includes:  
+  
+- Operating system version and bit type.  
+  
+- Web browser application and version.  
+  
+- [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] version.  
+  
+- Number of monitors used and screen resolution of the primary monitor.  
+  
+- Device processor class and random-access memory (RAM) details.
+
+- [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] application-specific information. [!INCLUDE[proc_more_information](../../includes/proc-more-information.md)] [Telemetry data](../admin/comply-unified-service-desk-data-gdpr.md#telemetry-data)
+
+## <a name="help-improve-unified-service-desk-enabled-by-default"></a>Help Improve Unified Service Desk enabled by default
+
+With the release of [!INCLUDE[pn-unified-service-desk-3-3](../../includes/pn-unified-service-desk-3-3.md)], by default, the Help Improve [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] feature is enabled for [!INCLUDE[pn_dynamics_crm_online](../../includes/pn-dynamics-crm-online.md)] instance and [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] sends information to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)].
+
+> [!Note]
+> If you are using [!INCLUDE[pn-unified-service-desk-3-2](../../includes/pn-unified-service-desk-3-2.md)] and lower with [!INCLUDE[pn_dynamics_crm_online](../../includes/pn-dynamics-crm-online.md)] instance, you must enable the Help improve [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] by configuring the **HelpImproveUSD** global option and setting the option to **True**. [!INCLUDE[proc_more_information](../../includes/proc-more-information.md)] [Enable sending improvement program information to Microsoft anonymously](#enable-sending-improvement-program-information-to-microsoft-anonymously)
+
+During new installation or upgrade scenario, the information about the transmitting the product usage and performance information to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)] appears as shown in the below image. This informaiton helps us to improve the product experience.
+
+![Transmitting usage and performance information](../media/helpimprove-usd-install.PNG "Transmitting usage and performance information")
+
+![Transmitting usage and performance information](../media/helpimprove-usd-upgrade.PNG "Transmitting usage and performance information")
+
+Configuring and setting the value of the Global Option: `HelpImproveUSD` to `FALSE` disables data collection and [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] does not send information to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)].
+
+> [!Note]
+>  The checkbox in the Help Improve [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] section on **About** page reflects whether or not [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] sends data to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)], and agent cannot select or clear the checkbox. However, [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] Administrators can control whether or not send data to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)].
+
+<a name="Disable_ImproveUSD"></a>   
+## <a name="disable-sending-improvement-program-information-to-includeccmicrosoftincludescc-microsoftmd-anonymously"></a>Disable sending improvement program information to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)] anonymously
+  
+1. Sign in to [!INCLUDE[pn_microsoftcrm](../../includes/pn-microsoftcrm.md)] apps as a user with the System Administrator or [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] Administrator security role.  
+  
+2. Go to **Settings** > **Unified Service Desk.**
+  
+3. Bấm vào **Tùy chọn**.  
+  
+4. On the Active UII Options page, click **New**.  
+  
+5. On the New Option page, select **HelpImproveUSD** in the **Global Options** list.  
+  
+6. In the Value box, type `FALSE`.
+  
+7. Click **SAVE & CLOSE**.
+  
+<a name="Enable_ImproveUSD"></a>   
+## <a name="enable-sending-improvement-program-information-to-microsoft-anonymously"></a>Enable sending improvement program information to Microsoft anonymously  
+
+1. Sign in to [!INCLUDE[pn_microsoftcrm](../../includes/pn-microsoftcrm.md)] apps as a user with the System Administrator or [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] Administrator security role.  
+  
+2. Chuyển tới **Thiết đặt** > **Unified Service Desk**.
+  
+3. Bấm vào **Tùy chọn**.
+  
+4. On the Active UII Options page,  select **HelpImproveUSD** from the **Global Options** list.
+  
+5. In the Value box, type `TRUE`.
+  
+6. Click **SAVE & CLOSE**.
+
+> [!NOTE]
+> Alternatively, you can enable the global option for sending improvement program information to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)] by performing the following.
+> 1. Go to **Settings** > **[!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)]** > **Options**.
+> 2. Select **HelpImproveUSD** checkbox.
+> 3. Click **Deactivate** in the toolbar.
+> 
+> [!Note]
+> If you delete the **HelpImproveUSD** global option from the UII options page, the data collection is enabled and [!INCLUDE[pn_unified_service_desk](../../includes/pn-unified-service-desk.md)] sends information to [!INCLUDE[cc_Microsoft](../../includes/cc-microsoft.md)]
+  
+## <a name="privacy-notice"></a>Thông báo bảo mật  
+[!INCLUDE[cc_privacy_usd_telemetry](../../includes/cc-privacy-usd-telemetry.md)]
+  
+## <a name="see-also"></a>Xem thêm
+[Manage Options for Unified Service Desk](../../unified-service-desk/admin/manage-options-unified-service-desk.md)
+
+[Provide feedback about Unified Service Desk](../admin/provide-feedback.md)

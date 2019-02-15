@@ -1,0 +1,16 @@
+items:
+- name: Extend Outlook Client
+  href: ../extend-customer-engagement-outlook.md
+  items:
+  - name: " Mẫu, bộ lọc Outlook và trực tuyến"
+    href: offline-outlook-filters-templates.md
+  - name: 'Sample: Create and retrieve Outlook filters'
+    href: sample-create-retrieve-outlook-filters.md
+  - name: 'Sample: Use Dynamics 365 for Outlook methods'
+    href: sample-outlook-methods.md
+ms.openlocfilehash: 5052d74bfb0c2444277c8239edc5ff31660f1636
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "386495"

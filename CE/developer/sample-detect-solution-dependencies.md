@@ -1,0 +1,62 @@
+---
+title: 'Sample: Detect solution dependencies (Dynamics 365 for Customer Engagement apps SDK)| MicrosoftDocs'
+description: ''
+keywords: ''
+ms.date: 10/31/2017
+ms.service: crm-online
+ms.custom: ''
+ms.topic: samples
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+ms.assetid: d347f96b-a137-42e1-a9bf-fac6d6133330
+author: JimDaly
+ms.author: jdaly
+manager: jdaly
+ms.reviewer: ''
+ms.suite: ''
+ms.tgt_pltfrm: ''
+helpviewer_keywords:
+- detecting solution dependencies sample
+- sample for detecting solution dependencies
+- solution entities samples, detecting solution dependencies sample
+topic-status: Drafting
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: a311c70b62d98320692cc8f43999aa067ea947c7
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "387276"
+---
+# <a name="sample-detect-solution-dependencies"></a>Sample: Detect solution dependencies
+
+[!INCLUDE[](../includes/cc_applies_to_update_9_0_0.md)]
+
+This sample code is for [!INCLUDE[pn_dynamics_crm_online](../includes/pn-dynamics-crm-online.md)] for Customer Engagement apps. Download the sample: [Work with solutions](https://code.msdn.microsoft.com/Sample-Work-with-solutions-a496ee8f).
+
+## <a name="prerequisites"></a>Điều kiện tiên quyết
+[!INCLUDE[sdk-prerequisite](../includes/sdk-prerequisite.md)]
+  
+## <a name="requirements"></a>Yêu cầu  
+[!INCLUDE[sdk_SeeConnectionHelper](../includes/sdk-seeconnectionhelper.md)]
+  
+## <a name="demonstrates"></a>Chứng tỏ  
+ This sample shows how to how to detect dependencies before you delete a solution component.  
+  
+## <a name="example"></a>Ví dụ  
+ [!code-csharp[solutions#GetSolutionDependencies](../snippets/csharp/CRMV8/solutions/cs/getsolutiondependencies.cs#getsolutiondependencies)]  
+  
+### <a name="see-also"></a>Xem thêm  
+ [Package and Distribute Extensions with Dynamics 365 for Customer Engagement apps Solutions](package-distribute-extensions-use-solutions.md)   
+ [Introduction to Solutions](introduction-solutions.md)   
+ [Plan For Solution Development](plan-solution-development.md)   
+ [Dependency Tracking for Solution Components](dependency-tracking-solution-components.md)   
+ [Create, Export, or Import an Unmanaged Solution](create-export-import-unmanaged-solution.md)   
+ [Create, Install, and Update a Managed Solution](create-install-update-managed-solution.md)   
+ [Uninstall or Delete a solution](uninstall-delete-solution.md)   
+ [Solution Entities](solution-entities.md)   
+ [Work with Solutions](work-solutions.md)   
+ [Sample: Work With Solutions](sample-work-solutions.md)

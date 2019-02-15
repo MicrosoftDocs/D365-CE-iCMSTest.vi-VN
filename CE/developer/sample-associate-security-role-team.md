@@ -1,0 +1,56 @@
+---
+title: 'Sample: Associate a security role to a team (Developer Guide for Dynamics 365 for Customer Engagement) | MicrosoftDocs'
+description: The sample shows how to assign a security role to a team by using the AssignRequest message.
+ms.custom: ''
+ms.date: 12/15/2017
+ms.reviewer: ''
+ms.service: crm-online
+ms.suite: ''
+ms.tgt_pltfrm: ''
+ms.topic: samples
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+helpviewer_keywords:
+- assigning a role to a team, sample
+- assigning a security role, sample
+- team security sample, assigning roles
+ms.assetid: 6097b89f-b3a6-472b-8fed-4f1aef62817f
+caps.latest.revision: 21
+author: JimDaly
+ms.author: jdaly
+manager: amyla
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: 8c047d37b5b623c7acae60de61d482db4a363ee3
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "387293"
+---
+# <a name="sample-associate-a-security-role-to-a-team"></a>Sample: Associate a security role to a team
+
+[!INCLUDE[](../includes/cc_applies_to_update_9_0_0.md)]
+
+This sample code is for [!INCLUDE[pn_dynamics_crm_online](../includes/pn-dynamics-crm-online.md)]. Download the Sample: [Work with early bound entity classes in code](https://code.msdn.microsoft.com/Work-with-early-bound-6914f6e7). 
+
+## <a name="prerequisites"></a>Điều kiện tiên quyết
+[!INCLUDE[sdk-prerequisite](../includes/sdk-prerequisite.md)]
+  
+## <a name="requirements"></a>Yêu cầu  
+[!INCLUDE[sdk_SeeConnectionHelper](../includes/sdk-seeconnectionhelper.md)]
+  
+## <a name="demonstrates"></a>Chứng tỏ  
+ This sample shows how to assign a security role to a team by using the <xref:Microsoft.Crm.Sdk.Messages.AssignRequest> message. Note that this example does not take into consideration that a team or user can only be assigned a role from its business unit. The role to be assigned is the first from the collection that is returned by the `RetrieveMultiple` method. If that record is from a business unit that is different from the requesting team, the assignment fails.  
+  
+## <a name="example"></a>Ví dụ  
+ [!code-csharp[StrongTypes#AssignSecurityRoleToTeam1](../snippets/csharp/CRMV8/strongtypes/cs/assignsecurityroletoteam1.cs#assignsecurityroletoteam1)]  
+  
+### <a name="see-also"></a>Xem thêm  
+ [Gán](introduction-entities.md#Assign)   
+ [Privilege and Role Entities](privilege-role-entities.md)   
+ [Sample: Associate a Security Role to a User](sample-associate-security-role-user.md)   
+ [User and Team Entities](user-team-entities.md)   
+ <xref:Microsoft.Crm.Sdk.Messages.AssignRequest>

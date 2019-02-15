@@ -1,0 +1,48 @@
+---
+title: Plug-in registration entities (Developer Guide for Dynamics 365 for Customer Engagement apps) | MicrosoftDocs
+description: 'Learn about plug-in registration entities that define a Dynamics 365 for Customer Engagement web services (SDK) message, the entities that support a particular message, and the entities used during plug-in registration. These entities do not apply to custom workflow activities. '
+ms.custom: ''
+ms.date: 10/31/2017
+ms.reviewer: ''
+ms.service: crm-online
+ms.suite: ''
+ms.tgt_pltfrm: ''
+ms.topic: article
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+ms.assetid: bd82dfec-a852-4bb1-8f46-7d574ac50782
+caps.latest.revision: 19
+author: JimDaly
+ms.author: jdaly
+manager: amyla
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: f4d84685eeeafd12ba260285055289710d065889
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "386198"
+---
+# <a name="plug-in-registration-entities"></a>Plug-in registration entities
+
+[!INCLUDE[](../includes/cc_applies_to_update_9_0_0.md)]
+
+The plug-in registration entities define a [!INCLUDE[cc-dyn365-ce-web-services](../includes/cc-dyn365-ce-web-services.md)] message, the entities that support a particular SDK message, and the entities used during plug-in registration. These entities do not apply to custom workflow activities.  
+  
+ An *SDK Message* defines a message to the [!INCLUDE[pn_dynamics_crm](../includes/pn-dynamics-crm.md)] apps platform. The message represents the operation that the platform is to perform. You should not create or update a record of this entity.  
+  
+ An *SDK Message Filter* defines what entity type, for example, account or contact, supports a particular SDK message. It also identifies whether a custom plug-in can be registered for the message and executed when the message is processed by the event execution pipeline.  
+  
+ The SDK message processing entities are used when registering a plug-in in the event execution pipeline. An *SDK Message Processing Step* entity identifies the event in the pipeline for which a plug-in should be executed. An *SDK Message Processing Step Image* entity stores a snapshot of an entity, including its attributes, during an event that occurs before or after the core platform operation. An *SDK Message Processing Step Secure Configuration* entity stores secure custom information that is passed to a plug-in’s constructor at run-time.  
+  
+### <a name="see-also"></a>Xem thêm  
+ [Write Plug-Ins to Extend Business Processes](write-plugin-extend-business-processes.md)   
+ [SdkMessage Entity](entities/sdkmessage.md)   
+ [SdkMessageFilter Entity](entities/sdkmessagefilter.md)   
+ [SdkMessageProcessingStep Entity](entities/sdkmessageprocessingstep.md)   
+ [SdkMessageProcessingStepImage Entity](entities/sdkmessageprocessingstepimage.md)   
+ [SdkMessageProcessingStepSecureConfig Entity](entities/sdkmessageprocessingstepsecureconfig.md)   
+ [Plug-in Entities](plug-in-entities.md)

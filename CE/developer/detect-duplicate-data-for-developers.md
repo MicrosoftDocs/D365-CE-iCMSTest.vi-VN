@@ -1,0 +1,69 @@
+---
+title: Detect duplicate data for developers (Developer Guide for Dynamics 365 for Customer Engagement apps) | MicrosoftDocs
+description: Overview of the duplicate detection capabilities, including detection policies and duplicate detection rules for entity types.
+ms.custom: ''
+ms.date: 07/02/2018
+ms.reviewer: ''
+ms.service: crm-online
+ms.suite: ''
+ms.tgt_pltfrm: ''
+ms.topic: get-started-article
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+ms.assetid: 872b735a-9c80-4e4e-8c04-61f8ce6836df
+author: JimDaly
+ms.author: jdaly
+manager: amyla
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: cf7e8bcd1614eabee6e987a43ae566342ef784c9
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "386811"
+---
+# <a name="detect-duplicate-data-for-developers"></a>Detect duplicate data for developers
+
+[!INCLUDE[](../includes/cc_applies_to_update_9_0_0.md)]
+
+> [!NOTE]
+> For information on how to create rules and run system jobs for detecting duplicate data using the Dynamics 365 for Customer Engagement apps user interface(UI), see [Detect duplicate data so you can fix or remove it](../admin/detect-duplicate-data.md).
+
+Duplicate detection lets organizations set duplicate detection policies and create duplicate detection rules for business and custom entities. These rules can be applied across different record types in [!INCLUDE[pn_microsoftcrm](../includes/pn-microsoftcrm.md)] apps. For example, an organization may define that a lead is a duplicate of a contact, if they have the same name and phone number. Based on the duplicate detection rules set by the administrator, the system alerts the user about potential duplicates when the user tries to create new records or update existing records. To maintain data quality, you can schedule a duplicate detection job to check for duplicates for all records that match a certain criteria. You can clean the data by deleting, deactivating, or merging the duplicates reported by a duplicate detection job.  
+  
+ To detect duplicates in the system, create a *duplicate detection rule* for a specific entity type. A duplicate detection rule is represented by the duplicate rule [DuplicateRule entity](entities/duplicaterule.md). Bạn có thể tạo nhiều quy tắc phát hiện cho cùng một loại thực thể. Tuy nhiên, bạn có thể xuất bản tối đa năm quy tắc phát hiện trùng lặp trên một loại thực thể cùng một lúc.  
+  
+ A rule can have one or more *duplicate detection rule conditions* that are represented by the duplicate rule condition [DuplicateRuleCondition entity](entities/duplicaterulecondition.md). The conditions are combined by the system as in logical `AND` operation. A duplicate detection rule specifies a base entity type and a matching entity type. A duplicate rule condition specifies the name of a base attribute and the name of a matching attribute. For example, specify an account as a base entity and a contact as a matching entity to compare last names and addresses. The matching criteria consist of operators such as exactly match, first n-number of characters, or last n-number of characters.  
+
+ Phát hiện sự trùng lặp hoạt động bằng cách so sánh mã đối chiếu đã được tạo của bản ghi hiện tại với từng bản ghi mới đang được tạo. Các mã đối chiếu này được tạo cùng với việc tạo của từng bản ghi mới. Do đó, có khả năng sẽ tạo ra một hoặc nhiều bản ghi trùng lặp nếu chúng được xử lý tại chính xác cùng một thời điểm. Ngoài sử dụng phát hiện sự trùng lặp khi chúng được tạo, bạn nên lên lịch cho các công việc phát hiện sự trùng lặp để kiểm tra các bản ghi có khả năng trùng lặp khác.
+
+  
+> [!IMPORTANT]
+>  Take special precautions when you create duplicate detection rules for appointments. The recurring appointment master and the recurring appointment records share some of the same attribute values, such as subject, location, and regarding object. Using any of these attributes as a duplicate detection rule condition [DuplicateRuleCondition entity](entities/duplicaterulecondition.md), may result in incorrectly marking recurring appointment records as duplicates. To avoid this, also include a start time attribute as a duplicate detection rule condition. For more information about working with recurring appointments, see [Working with Schedules and Appointments](schedule-appointment-entities.md).  
+  
+ The duplicate detection rules are system-wide. You must publish them before running a duplicate detection job to detect duplicates for bulk data or retrieve duplicates for a particular entity record. To publish a duplicate detection rule, use the `PublishDuplicateRule` message(<xref href="Microsoft.Dynamics.CRM.PublishDuplicateRule?text=PublishDuplicateRule Action" /> or <xref:Microsoft.Crm.Sdk.Messages.PublishDuplicateRuleRequest>). Duplicate rule publishing is an asynchronous operation that runs in the background.  
+  
+## <a name="in-this-section"></a>In This Section  
+
+ [Enable and Disable Duplicate Detection](enable-disable-duplicate-detection.md)<br />
+ [Run Duplicate Detection](run-duplicate-detection.md)<br />
+ [Manage duplicate detection during Create and Update operations](duplicate-detection-create-update.md)<br />
+ [Duplicate Detection Messages](duplicate-detection-messages.md)<br />
+ [Duplicate Rule entities](duplicaterule-entities.md)<br />
+ [DuplicateRule Entity](entities/duplicaterule.md)<br />
+ [DuplicateRuleCondition Entity](entities/duplicaterulecondition.md)<br />
+ [DuplicateRecord Entity](entities/duplicaterecord.md)<br />
+  
+## <a name="related-sections"></a>Các phần liên quan  
+ [Data Management in Dynamics 365 for Customer Engagement apps (Auditing, Duplicate Detection, Bulk Delete, Data Import)](manage-data.md)  
+ [Delete data in bulk](delete-data-bulk.md)
+
+## <a name="see-also"></a>Xem thêm
+
+[Sample: Enable Duplicate Detection and Retrieve Duplicates](org-service/sample-enable-duplicate-detection-and-retrieve-duplicates.md)<br />
+[Sample: Invoke Duplicate Detection For Creating and Updating Records](org-service/sample-use-duplicate-detection-when-creating-and-updating-records.md)<br />
+[Sample: Detect Multiple Duplicate Records](org-service/sample-detect-multiple-duplicate-records.md)<br />
+ 

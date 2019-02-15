@@ -1,0 +1,163 @@
+---
+title: API Limits | MicrosoftDocs
+description: Understand the limits for API requests.
+ms.custom: ''
+ms.date: 03/08/2018
+ms.reviewer: sriknair
+ms.service: crm-online
+ms.topic: article
+applies_to:
+- Dynamics 365 for Customer Engagement (online)
+ms.assetid: 6cba6191-4e10-4b21-823a-b0cf71ef21d5
+author: MicroSri
+ms.author: jdaly
+manager: faisalmo
+search.audienceType:
+- developer
+search.app:
+- D365CE
+ms.openlocfilehash: 926c2c7da4848847d0ae26f4c37baa5cec407797
+ms.sourcegitcommit: 9f0efd59de16a6d9902fa372cb25fc0baf1c2838
+ms.translationtype: HT
+ms.contentlocale: vi-VN
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "385877"
+---
+# <a name="api-limits"></a>API Limits
+
+- [!INCLUDE [cc_applies_to_update_9_0_0](../includes/cc_applies_to_update_9_0_0.md)]
+- [!INCLUDE [cc_applies_to_update_8_2_0](../includes/cc_applies_to_update_8_2_0.md)]
+
+Beginning March 19, 2018 we will limit the number of API requests made by each user, per organization instance, within a five minute interval. Khi vượt quá giới hạn này, nền tảng sẽ đưa ra ngoại lệ.
+
+Giới hạn sẽ giúp đảm bảo rằng trong trường hợp người dùng chạy các ứng dụng thực hiện lượng yêu cầu đặc biệt lớn trên các máy chủ, họ sẽ không làm ảnh hưởng đến những người dùng khác. Giới hạn sẽ không ảnh hưởng đến người dùng thông thường trên nền tảng. Chỉ những ứng dụng thực hiện một lượng rất lớn các yêu cầu API mới bị ảnh hưởng. Dựa trên phân tích dữ liệu qua phương pháp đo từ xa, giới hạn này vẫn nằm trong biên của hầu hết các ứng dụng thực hiện một lượng lớn yêu cầu API. Giới hạn sẽ đưa ra một mức độ bảo vệ chống đột biến ngẫu nhiên và ngoài ý muốn từ một lượng lớn các yêu cầu mà có thể đe dọa tới tính khả dụng và đặc tính hiệu suất của nền tảng [!INCLUDE [pn-dyn-365](../includes/pn-dyn-365.md)].
+
+If your application has the potential to exceed the limit, please consider the guidance given in the [What should I do if my application exceeds the limit?](#what-should-i-do-if-my-application-exceeds-the-limit) section below.
+
+## <a name="what-is-the-limit"></a>What is the limit?
+
+Each user will be allowed up to 60,000 API requests, per organization instance, within five minute sliding interval.
+
+## <a name="what-happens-when-the-limit-is-exceeded"></a>What happens when the limit is exceeded?
+
+When the limit is exceeded, any requests will return error responses.
+
+If you use the .NET SDK assemblies, the platform will respond with a `FaultException<OrganizationServiceFault>` WCF Fault with the error code `-2147015902` and the message `Number of requests exceeded the limit of 60000, measured over time window of 300 seconds.`
+
+If you use HTTP requests, the response will include these properties:<br />
+`StatusCode` : `429`<br />
+`Message` : `Number of requests exceeded the limit of 60000, measured over time window of 300 seconds.`
+
+All requests will return these error responses until the volume of API requests falls below the limit. If you get these responses, your application should stop sending API requests until the volume of requests is below the limit.
+
+## <a name="how-is-this-limit-calculated"></a>How is this limit calculated?
+
+Within an organization instance, API requests made by each of your licensed users (including the licensed identity used for running automation) will be measured against this limit. The platform will measure the number of API requests made in five minutes, which keeps sliding by a definite period. During each measurement interval, at the end of five minutes, the number of API requests by the user is counted. In the figure below, three users are making API call requests over a six-minute period.  
+
+![api-limit-implementation](media/api-limit-implementation-1.png)
+
+|Interval|Mô tả|
+|--|--|
+|A|At the end of five minutes, the total number of API requests for user 1 is 6K, user 2 is 3K, and user 3 is 10K.|
+|B|At 5+X minutes, X being a constant slice of time (say, a few seconds), which is the sliding interval constant, the platform measures the total for each of these users who are still active. According to the diagram above, this would be user 1 = 7K, user 2 is 6K and user 3 is 25K. All the cumulative numbers are still below the 60,000 limit, so no change in behavior is expected for these users.|
+|C|As time passes and reaches 5+2X, user 3 makes about 40K API requests, while user 1 and user 2 make 8K and 9K calls, respectively. This results in user 3 reaching 65K API requests within five minutes, which causes 5K (65K-60K=5K) of his requests to be denied.|
+
+> [!NOTE]
+> Requests that perform multiple API requests like <xref:Microsoft.Xrm.Sdk.Messages.ExecuteMultipleRequest> or <xref:Microsoft.Xrm.Sdk.Messages.ExecuteTransactionRequest> using the .NET SDK assemblies, or `$batch` using the Web API, count as a single request to calculate this limit. However, these API requests must follow the [Run-time limitations](org-service/use-executemultiple-improve-performance-bulk-data-load.md#run-time-limitations) for these types of operations.
+
+## <a name="what-should-i-do-if-my-application-exceeds-the-limit"></a>What should I do if my application exceeds the limit?
+
+When your application exceeds the limit, the error response from the server specifies the amount of time you should wait before sending more requests. The response object is slightly different if you are using SDK assemblies or HTTP requests.
+
+For a discussion of best practices, see [Azure Architecture Best Practices Transient fault handling](/azure/architecture/best-practices/transient-faults)
+
+[The Polly Project](http://www.thepollyproject.org/) is a library which includes capabilities for dealing with transient faults using execution policies.
+
+### <a name="http-requests"></a>HTTP requests
+
+If you are using HTTP requests, you can look for the `Retry-After` HTTP header included in the error response. This will contain a value in seconds indicating how long you should wait before making a follow-up request. More information [MDN web docs Retry-After](https://developer.mozilla.org/docs/Web/HTTP/Headers/Retry-After)
+
+### <a name="sdk-assemblies"></a>SDK assemblies
+
+If you are using the SDK assemblies, you can look for the `Retry-After` delay in the <xref:Microsoft.Xrm.Sdk.OrganizationServiceFault>.<xref:Microsoft.Xrm.Sdk.BaseServiceFault.ErrorDetails> property, using the key `"Retry-After"`. The value returned is a [TimeSpan](/dotnet/api/system.timespan) object.
+
+### <a name="net-sdk-assembly-example"></a>.NET SDK Assembly Example
+
+The following example uses the [Retry class](#retry-class) described below to retrieve one account using the <xref:Microsoft.Xrm.Sdk.IOrganizationService>.<xref:Microsoft.Xrm.Sdk.IOrganizationService.RetrieveMultiple*> method. If the request fails because an API limit has been exceeded, the `Retry` class will wait according to a delay specified by the server and try again.
+
+```csharp
+var qe = new QueryExpression("account") { TopCount = 1 };
+EntityCollection result = Retry.Do(() => service.RetrieveMultiple(qe));
+```
+
+#### <a name="retry-class"></a>Retry class
+
+The `Retry` class demonstrates how to retry requests that fail with transient errors based on known <xref:Microsoft.Xrm.Sdk.OrganizationServiceFault> error codes. The `Retry` class waits before retrying. If the fault specifies a retry delay, wait according to the delay specified by the server. Else use exponential backoff to calculate the delay based on the number of retry attempts made.
+
+```csharp
+using System;
+using System.ServiceModel;
+using System.Threading;
+
+public class Retry
+{
+    private const int RateLimitExceededErrorCode = -2147015902;
+
+    public static TResult Do<TResult>(Func<TResult> func, int maxRetries = 3)
+    {
+        int retryCount = 0;
+
+        while (true)
+        {
+            try
+            {
+                return func();
+            }
+            catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex) 
+                when (IsTransientError(ex))
+            {
+                if (++retryCount >= maxRetries)
+                {
+                    throw;
+                }
+
+                if (ex.Detail.ErrorCode == RateLimitExceededErrorCode)
+                {
+                    // Use Retry-After delay when specified
+                    delay = (TimeSpan)ex.Detail.ErrorDetails["Retry-After"];
+                }
+                else
+                {
+                    // else use exponential backoff delay
+                    delay = TimeSpan.FromSeconds(Math.Pow(2, retryCount));
+                }
+
+                Thread.Sleep(delay);
+            }
+        }
+    }
+
+    private static bool IsTransientError(FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex)
+    {
+        // You can add more transient fault codes to retry here
+        if (ex.Detail.ErrorCode == RateLimitExceededErrorCode)
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
+```
+
+
+
+### <a name="see-also"></a>Xem thêm
+
+[Use the Dynamics 365 for Customer Engagement Organization apps service](use-microsoft-dynamics-365-organization-service.md)<br />
+[Use the Dynamics 365 for Customer Engagement Web API](use-microsoft-dynamics-365-web-api.md)<br />
+[Execute batch operations using the Web API](webapi/execute-batch-operations-using-web-api.md)<br />
+[Use ExecuteMultiple to improve performance for bulk data load](org-service/use-executemultiple-improve-performance-bulk-data-load.md)
+
+
+
